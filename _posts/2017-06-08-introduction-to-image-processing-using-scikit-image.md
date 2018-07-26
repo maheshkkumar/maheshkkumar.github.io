@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Introduction to Image Processing in Scikit-Image
+title: Introduction to Image Processing using Scikit-Image
 date: 2017-06-08 16:47:14 +0530
 author: "Mahesh Kumar K"
 categories: article
