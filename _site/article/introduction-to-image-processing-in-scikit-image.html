@@ -1,0 +1,528 @@
+<!doctype html>
+<html>
+
+<head>
+
+  <title>
+    
+      Image Processing | Mahesh Kumar
+    
+  </title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/syntax.css">
+  <!-- Use Atom -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/rss-feed.xml" title="Mahesh Kumar" />
+  <!-- Use RSS-2.0 -->
+  <!--<link href="/rss-feed.xml" type="application/rss+xml" rel="alternate" title="Mahesh Kumar | "/>
+  //-->
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quattrocento+Sans">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <script type="text/javascript" async
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+
+  <!-- Google Analytics -->
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-82492711-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <!-- Use Jekyll SEO plugin -->
+  <!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>Image Processing | Mahesh Kumar</title>
+<meta name="generator" content="Jekyll v3.6.2" />
+<meta property="og:title" content="Image Processing" />
+<meta name="author" content="Mahesh Kumar K" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Introduction to Image Processing in Scikit-Image" />
+<meta property="og:description" content="Introduction to Image Processing in Scikit-Image" />
+<link rel="canonical" href="http://localhost:4000/article/introduction-to-image-processing-in-scikit-image.html" />
+<meta property="og:url" content="http://localhost:4000/article/introduction-to-image-processing-in-scikit-image.html" />
+<meta property="og:site_name" content="Mahesh Kumar" />
+<meta property="og:image" content="http://localhost:4000/combined_golden_gate.jpeg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2017-06-08T16:47:14+05:30" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Image Processing","dateModified":"2017-06-08T16:47:14+05:30","datePublished":"2017-06-08T16:47:14+05:30","image":"http://localhost:4000/combined_golden_gate.jpeg","url":"http://localhost:4000/article/introduction-to-image-processing-in-scikit-image.html","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/article/introduction-to-image-processing-in-scikit-image.html"},"author":{"@type":"Person","name":"Mahesh Kumar K"},"description":"Introduction to Image Processing in Scikit-Image","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+</head>
+
+
+<body>
+
+  <div class="container">
+    <header class="masthead">
+  <h3 class="masthead-title">
+    <a href="/">Mahesh Kumar</a>
+    <!-- <small class="masthead-subtitle"></small> -->
+    <div class="menu">
+  <nav class="menu-content">
+    
+      <a href="/menu/about.html">About</a>
+    
+  </nav>
+  <nav class="social-icons">
+    
+  
+  
+    <a href="https://www.github.com/maheshkkumar" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a>
+  
+
+  
+  
+    <a href="https://twitter.com/maheshkumark_" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+  
+
+  
+  
+    <a href="https://www.linkedin.com/in/maheshkumark" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+  
+
+  
+  
+    <a href="mailto:maheshk2194@gmail.com" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+  
+
+  
+  
+    <a href="/rss-feed.xml"><i class="fa fa-rss-square" aria-hidden="true"></i></a>
+  
+
+  </nav>
+</div>
+
+  </h3>
+</header>
+
+
+    <div class="post-container">
+      <h1>
+  Image Processing
+</h1>
+
+
+  <img src="/assets/img/combined_golden_gate.jpeg">
+
+
+<h1 id="introduction-to-image-processing-in-scikit-image">Introduction to Image Processing in Scikit-Image</h1>
+
+<p><strong>Image Processing</strong> is the process of applying mathematical functions or operations to an image, in order to transform it according to the problem requirements.</p>
+
+<p>It is closely related to <strong>Computer Graphics</strong> and <strong>Computer Vision</strong>.</p>
+
+<p>According to <a href="https://en.wikipedia.org/wiki/Image_processing">Wikipedia</a>,</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In computer graphics, images are manually made from physical models of objects, environments, and lighting, instead of being acquired (via imaging devices such as cameras) from natural scenes, as in most animated movies.
+
+In computer vision, on the other hand, is often considered high-level image processing out of which a machine/computer/software intends to decipher the physical contents of an image or a sequence of images (e.g., videos or 3D full-body magnetic resonance scans).  
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="what-is-an-image">What is an image?</h3>
+
+<p>There are two ways to look at an image.</p>
+
+<ol>
+  <li>Human’s Perspective</li>
+  <li>Computer’s Perspective</li>
+</ol>
+
+<h3 id="1-humans-perspective">1. Human’s Perspective</h3>
+
+<h4 id="how-do-we-perceive-an-image">How do we perceive an image?</h4>
+
+<p>According to <a href="http://www.kenrockwell.com/tech/how-we-see.htm">kenrockwell</a>,</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Our eyes don't send images to our brains. Images are constructed in our brains based on very simple signals sent from our eyes.
+
+The nerve signals from our eyes are still the subject of much study, and mostly represent edges, shapes and motion. They do not send images. 
+
+"Seeing" is a very complex higher-order brain function, and a huge percentage of our brains (the largest, in fact, of any brain function) is required for doing nothing other than recognize what's in front of us.
+
+Our brains form images based on pattern recognition. We don't see images; our eyes see line and motion, our brains interpret that to attempt to recognize to what sort of thing those lines and motion might represent, and then our brains seamlessly cause us to perceive whatever that object might be.
+</code></pre></div></div>
+
+<h3 id="2-computers-perspective">2. Computer’s Perspective</h3>
+
+<h4 id="how-does-a-computer-perceive-an-image">How does a Computer perceive an image?</h4>
+
+<p>For a computer an image is nothing but a bunch of numbers, but in a particular structure. Either a 2D or a 3D matrix of numbers.</p>
+
+<p>Consider the above example of a cat, let’s see how a computer views this image.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Images can be either binary, grayscale or multi-channel like RGB or HSV. 
+
+* In case of a binary image, the value of each pixel can be either 0 or 1. Binary - (0) or (1)
+
+* In case of a grayscale image, the value of each pixel is in the range of 0 to 255, as it's going to be a 8 bit value. Grayscale - (255)
+
+* In case of multi-channel image, the value of each pixel is composed of multiple values, in case of RGB, each pixel will have a value for Red, Blue and Green and each value will range from 0 to 255. RGB - (255, 255, 255)
+</code></pre></div></div>
+
+<ul>
+  <li>Credits to <a href="https://homepages.inf.ed.ac.uk/rbf/HIPR2/glossary.htm">Bob Fisher</a> for providing great resource on Image Processing.</li>
+</ul>
+
+<hr />
+
+<h4 id="topics-to-be-covered-in-this-post">Topics to be covered in this post:</h4>
+
+<ol>
+  <li>Input/Output operations and  datatype</li>
+  <li>Colorspaces</li>
+  <li>Image Processing<br />
+a. Local Filters<br />
+b. Non Local Filters  <br />
+c. Mathematical Morphology
+    <ul>
+      <li>Dilation</li>
+      <li>Erosion</li>
+    </ul>
+  </li>
+  <li>Image Segmentation</li>
+</ol>
+
+<h3 id="1-inputoutput-operations-and-datatype">1. Input/Output operations and datatype</h3>
+
+<p>The first and the foremost step in any image processing pipeline is to read the image(s).</p>
+
+<p>In scikit-image we can perform the I/O opertions as shown below.</p>
+
+<p>But, before that let’s import the necessary libraries to support the above I/O operations.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># imports</span>
+
+<span class="kn">from</span> <span class="nn">skimage.io</span> <span class="kn">import</span> <span class="n">imread</span><span class="p">,</span> <span class="n">imshow</span><span class="p">,</span> <span class="n">imsave</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+
+<span class="n">img</span> <span class="o">=</span> <span class="n">imread</span><span class="p">(</span><span class="s">'golden-gateway-bridge.jpeg'</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="/assets/img/output_1_1.png" alt="png" /></p>
+
+<p>Skimage also contains others features such as saving an image, reading an image collection and much more.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># saving an image</span>
+
+<span class="n">imsave</span><span class="p">(</span><span class="s">'image-name.jpg'</span><span class="p">,</span> <span class="n">img</span><span class="p">)</span> <span class="c"># img - image matrix</span>
+</code></pre></div></div>
+
+<p><strong>Image data types</strong></p>
+
+<p>Image numpy ndarrays can be represented either by integers (signed or un-signed) or floating point values.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">img</span><span class="o">.</span><span class="n">dtype</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dtype('uint8')
+</code></pre></div></div>
+
+<p>The image is of <strong>integer</strong> type.</p>
+
+<h3 id="2-colorspaces">2. Colorspaces</h3>
+
+<p>Color images are of shape (rows, columns, channels).<br />
+E.g., RGB</p>
+
+<p>Let’s have a look at the colorspace of the input image.</p>
+
+<p>The input image contains:<br />
+Rows: 2323<br />
+Columns: 3484<br />
+Channels: 3</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">img</span><span class="o">.</span><span class="n">shape</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(2323L, 3484L, 3L)
+</code></pre></div></div>
+
+<p>Skimage also supports conversion of images from one colorspace to other.</p>
+
+<p>The list below shows only the frequently used colorspace conversions.</p>
+
+<ol>
+  <li><strong>rgb2hsv</strong><br />
+ The is used to convert from RGB to HSV space.</li>
+  <li><strong>rgb2gray</strong><br />
+ This is used to convert from RGB to Grayscale space.</li>
+  <li><strong>hsv2rgb</strong><br />
+ This is used to convert from HSV to RGB space.</li>
+</ol>
+
+<p>Let’s look at the implementations for the above conversions.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">skimage.color</span> <span class="kn">import</span> <span class="n">rgb2gray</span><span class="p">,</span> <span class="n">rgb2hsv</span><span class="p">,</span> <span class="n">hsv2rgb</span>
+
+<span class="c"># rgb2hsv</span>
+
+<span class="n">rgb_to_hsv</span> <span class="o">=</span> <span class="n">rgb2hsv</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">rgb_to_hsv</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="/assets/img/output_9_1.png" alt="png" /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># rgb2gray</span>
+
+<span class="n">rgb_to_gray</span> <span class="o">=</span> <span class="n">rgb2gray</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">rgb_to_gray</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s">'gray'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="/assets/img/output_10_1.png" alt="png" /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># hsv2rgb</span>
+
+<span class="n">hsv_to_rgb</span> <span class="o">=</span> <span class="n">hsv2rgb</span><span class="p">(</span><span class="n">rgb_to_hsv</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">hsv_to_rgb</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="/assets/img/output_11_1.png" alt="png" /></p>
+
+<h3 id="3-image-preprocessing">3. Image Preprocessing</h3>
+
+<p>In image preprocessing, the input input images will be enchanced according to the problem requirements.</p>
+
+<p>Image preprocessing can include noise reduction, local filters, non-local filters and different kinds of morphological methods such as dilation or erosion.</p>
+
+<p><strong>Local Filters</strong></p>
+
+<p>Local filters replace the value of pixels by a function of the values of the neighbouring pixels. The process can consider either 4-neighbours or 8-neighbours.</p>
+
+<p>Neighbourhood pixels will be chosen in the form of a structuring element such as a disk, square or a rectange.</p>
+
+<p>Example for local filters is shown below:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">skimage.filters</span> <span class="kn">import</span> <span class="n">sobel</span>
+
+<span class="n">sobel_img</span> <span class="o">=</span> <span class="n">sobel</span><span class="p">(</span><span class="n">rgb_to_gray</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">sobel_img</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="/assets/img/output_13_1.png" alt="png" /></p>
+
+<p><strong>Non-Local Filters</strong></p>
+
+<p>Non-local filters use a large region of the image to transform the value of one pixel.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">exposure</span>
+<span class="kn">from</span> <span class="nn">skimage.io</span> <span class="kn">import</span> <span class="n">imread</span>
+
+<span class="n">img_to_gray</span> <span class="o">=</span> <span class="n">rgb2gray</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="n">img_equalized</span> <span class="o">=</span> <span class="n">exposure</span><span class="o">.</span><span class="n">equalize_hist</span><span class="p">(</span><span class="n">img_to_gray</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img_equalized</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s">'gray'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="/assets/img/output_15_1.png" alt="png" /></p>
+
+<p><strong>Mathematical morphology</strong></p>
+
+<p>In the simplest form, morphology is the study of shape. It mostly deals with the mathematical theory of describing shapes using sets.</p>
+
+<p>Most common mathematical morphological methods are:</p>
+
+<p><strong>Dilation</strong></p>
+
+<p>The purpose of dilation is to expand a particular shape in the image by making use of a structural element. This is usually applied to binary images.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">skimage.data</span> <span class="kn">import</span> <span class="n">coins</span>
+<span class="kn">from</span> <span class="nn">skimage.filters</span> <span class="kn">import</span> <span class="n">threshold_otsu</span>
+<span class="kn">from</span> <span class="nn">skimage.morphology</span> <span class="kn">import</span> <span class="n">disk</span><span class="p">,</span> <span class="n">dilation</span>
+
+<span class="n">coins</span> <span class="o">=</span> <span class="n">coins</span><span class="p">()</span>
+
+<span class="n">seg</span> <span class="o">=</span> <span class="n">threshold_otsu</span><span class="p">(</span><span class="n">coins</span><span class="p">)</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="n">coins</span> <span class="o">&gt;</span> <span class="n">seg</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s">'gray'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="/assets/img/output_17_1.png" alt="png" /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dilated_img</span> <span class="o">=</span> <span class="n">dilation</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">selem</span><span class="o">=</span><span class="n">disk</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">dilated_img</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s">'gray'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="/assets/img/output_18_1.png" alt="png" /></p>
+
+<p>The difference between the above two images, shows how dilation works.</p>
+
+<p><strong>Erosion</strong></p>
+
+<p>The purpose of erosion is to erode away the boundaries of regions of foreground pixels. Thus areas of foreground pixels shrink in size.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">skimage.morphology</span> <span class="kn">import</span> <span class="n">erosion</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s">'gray'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="/assets/img/output_21_1.png" alt="png" /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">eroded_img</span> <span class="o">=</span> <span class="n">erosion</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">selem</span><span class="o">=</span><span class="n">disk</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">eroded_img</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s">'gray'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="/assets/img/output_22_1.png" alt="png" /></p>
+
+<p>Erosion process eroded the white pixels in the above images.</p>
+
+<h3 id="4-image-segmentation">4. Image Segmentation</h3>
+
+<p>Image Segmentation is one of the most fascinating topics in Image Processing, with the increasing demand for self-driving research, image segmentation has become the hot topic, segmenting different objects in a given scence for the car to understand and act accordingly is a real challenge.</p>
+
+<p>Few image segmentation techniques:</p>
+
+<p><strong>Histogram based method: Otsu thresholding</strong></p>
+
+<p>The Otsu method is a simple heuristic to find the threshold to seperate the foreground from the background, to understand different components in the image.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">skimage.data</span> <span class="kn">import</span> <span class="n">coins</span>
+<span class="kn">from</span> <span class="nn">skimage.filters</span> <span class="kn">import</span> <span class="n">threshold_otsu</span>
+
+<span class="n">coins</span> <span class="o">=</span> <span class="n">coins</span><span class="p">()</span>
+
+<span class="n">seg</span> <span class="o">=</span> <span class="n">threshold_otsu</span><span class="p">(</span><span class="n">coins</span><span class="p">)</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="n">coins</span> <span class="o">&gt;</span> <span class="n">seg</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s">'gray'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="/assets/img/output_25_1.png" alt="png" /></p>
+
+<p><strong>Label connected components</strong></p>
+
+<p>This step is taken into consideration when there is a need to seperate or label the discrete components that were created after thresholding.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">skimage.morphology</span> <span class="kn">import</span> <span class="n">label</span>
+
+<span class="n">all_labels</span> <span class="o">=</span> <span class="n">label</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">all_labels</span><span class="p">)</span>
+</code></pre></div></div>
+<p><img src="/assets/img/output_27_1.png" alt="png" /></p>
+
+<p>This was just an introduction to basic image processing techniques, for more in-depth information refer to the below mentioned resources.</p>
+
+<ol>
+  <li><a href="http://www.pyimagesearch.com">PyImageSearch</a></li>
+  <li><a href="http://scikit-image.org/">Scikit-Image</a></li>
+  <li><a href="http://homepages.inf.ed.ac.uk/rbf/HIPR2/">Robert Fisher</a></li>
+</ol>
+
+
+<span class="post-date">
+  Written on
+  
+  June
+  8th,
+  2017
+  by
+  
+    Mahesh Kumar K
+  
+</span>
+
+<div class="post-date">Feel free to share!</div>
+  <div class="sharing-icons">
+    <a href="https://twitter.com/intent/tweet?text=Image Processing&amp;url=/article/introduction-to-image-processing-in-scikit-image.html" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=/article/introduction-to-image-processing-in-scikit-image.html&amp;title=Image Processing" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+    <a href="https://plus.google.com/share?url=/article/introduction-to-image-processing-in-scikit-image.html" target="_blank"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+  </div>
+</div>
+
+
+<div class="related">
+  <h1 >You may also enjoy:</h1>
+  
+  <ul class="related-posts">
+    
+      
+        
+        
+      
+    
+  </ul>
+</div>
+
+
+
+  <section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = "www-maheshkumar-xyz";
+    var disqus_identifier = "/article/introduction-to-image-processing-in-scikit-image.html";
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+    </div>
+
+    <footer class="footer">
+  
+  
+  
+    <a href="https://www.github.com/maheshkkumar" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a>
+  
+
+  
+  
+    <a href="https://twitter.com/maheshkumark_" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+  
+
+  
+  
+    <a href="https://www.linkedin.com/in/maheshkumark" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+  
+
+  
+  
+    <a href="mailto:maheshk2194@gmail.com" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+  
+
+  
+  
+    <a href="/rss-feed.xml"><i class="fa fa-rss-square" aria-hidden="true"></i></a>
+  
+
+  <!-- <div class="post-date"><a href="/menu/about.html">Mahesh Kumar |  by Mahesh Kumar</a></div> -->
+  <div class="post-date">Theme Courtesy -<a href="https://github.com/LeNPaul/Lagrange">Lagrange</a><i class="fas fa-thumbs-up"></i></div>
+</footer>
+
+  </div>
+
+</body>
+</html>

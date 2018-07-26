@@ -1,0 +1,410 @@
+<!doctype html>
+<html>
+
+<head>
+
+  <title>
+    
+      A guide to deploying Machine/Deep Learning model(s) in Production | Mahesh Kumar
+    
+  </title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/syntax.css">
+  <!-- Use Atom -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/rss-feed.xml" title="Mahesh Kumar" />
+  <!-- Use RSS-2.0 -->
+  <!--<link href="/rss-feed.xml" type="application/rss+xml" rel="alternate" title="Mahesh Kumar | "/>
+  //-->
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quattrocento+Sans">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <script type="text/javascript" async
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+
+  <!-- Google Analytics -->
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-82492711-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <!-- Use Jekyll SEO plugin -->
+  <!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>A guide to deploying Machine/Deep Learning model(s) in Production | Mahesh Kumar</title>
+<meta name="generator" content="Jekyll v3.6.2" />
+<meta property="og:title" content="A guide to deploying Machine/Deep Learning model(s) in Production" />
+<meta name="author" content="Mahesh Kumar K" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Source: XKCD" />
+<meta property="og:description" content="Source: XKCD" />
+<link rel="canonical" href="http://localhost:4000/article/a-guide-to-deploying-machine-learning-models-in-production.html" />
+<meta property="og:url" content="http://localhost:4000/article/a-guide-to-deploying-machine-learning-models-in-production.html" />
+<meta property="og:site_name" content="Mahesh Kumar" />
+<meta property="og:image" content="http://localhost:4000/ml.jpeg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-06-25T00:00:00+05:30" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"A guide to deploying Machine/Deep Learning model(s) in Production","dateModified":"2018-06-25T00:00:00+05:30","datePublished":"2018-06-25T00:00:00+05:30","image":"http://localhost:4000/ml.jpeg","url":"http://localhost:4000/article/a-guide-to-deploying-machine-learning-models-in-production.html","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/article/a-guide-to-deploying-machine-learning-models-in-production.html"},"author":{"@type":"Person","name":"Mahesh Kumar K"},"description":"Source: XKCD","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+</head>
+
+
+<body>
+
+  <div class="container">
+    <header class="masthead">
+  <h3 class="masthead-title">
+    <a href="/">Mahesh Kumar</a>
+    <!-- <small class="masthead-subtitle"></small> -->
+    <div class="menu">
+  <nav class="menu-content">
+    
+      <a href="/menu/about.html">About</a>
+    
+  </nav>
+  <nav class="social-icons">
+    
+  
+  
+    <a href="https://www.github.com/maheshkkumar" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a>
+  
+
+  
+  
+    <a href="https://twitter.com/maheshkumark_" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+  
+
+  
+  
+    <a href="https://www.linkedin.com/in/maheshkumark" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+  
+
+  
+  
+    <a href="mailto:maheshk2194@gmail.com" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+  
+
+  
+  
+    <a href="/rss-feed.xml"><i class="fa fa-rss-square" aria-hidden="true"></i></a>
+  
+
+  </nav>
+</div>
+
+  </h3>
+</header>
+
+
+    <div class="post-container">
+      <h1>
+  A guide to deploying Machine/Deep Learning model(s) in Production
+</h1>
+
+
+  <img src="/assets/img/ml.jpeg">
+
+
+<p><em>Source: <a href="https://www.explainxkcd.com/wiki/index.php/1875:_Computers_vs_Humans">XKCD</a></em></p>
+
+<p>There are a plethora of articles on Deep Learning (DL) or Machine Learning (ML) that cover topics like data gathering, data munging, network/algorithm selection, training, validation, and evaluation. But, one of the challenging problems in today’s data science is the <em>deployment</em> of the trained model in production for any consumer-centric organizations or individuals who want to make their solutions reach a wider audience.</p>
+
+<p>Most of the time, energy and resources are spent on training the model to achieve the desired results, so allocating additional time and energy to decide on the computational resources to set up the appropriate infrastructure to replicate the model for achieving similar results in a different environment (production) at scale will be a difficult task. Overall, it’s a lengthy process that can easily take up months right from the decision to use DL to deploying the model.</p>
+
+<p><img src="/assets/img/machine_learning_deployment.jpeg" alt="Source: Algorithmia" />
+<em>Source: <a href="https://blog.algorithmia.com/deploying-machine-learning-at-scale/">Algorithmia</a></em></p>
+
+<hr />
+
+<p>This article tries to give a comprehensive overview of the entire process of deployment from scratch.</p>
+
+<p><img src="/assets/img/dl_architecture.png" alt="Illustration of the workflow (from client API requests to server prediction responses) and you are free to use the image." />
+<em>Illustration of the workflow (from client API requests to server prediction responses). You are free to use the image.</em></p>
+
+<p><strong>Note</strong>: <em>The above image is just an illustration of a probable architecture and used primarily for learning purpose.</em></p>
+
+<h3 id="components">Components</h3>
+
+<p>Let’s break down the above image that depicts the entire API workflow and understand every component.</p>
+
+<ul>
+  <li>
+    <p><strong><a href="https://en.wikipedia.org/wiki/Client_(computing)">Client</a></strong>: The client in the architecture can be any device or a third party application that tries to request the server hosting the architecture for model predictions. Example: Facebook trying to tag your face on a newly uploaded image.</p>
+  </li>
+  <li>
+    <p><strong><a href="https://en.wikipedia.org/wiki/Load_balancing_(computing)">Load Balancer</a></strong>: A load balancer tries to distribute the workload (requests) across multiple servers or instances in a cluster. The aim of the load balancer is to minimize the response time and maximize the throughput by avoiding the overload on any single resource. In the above image, the load balancer is public facing entity and distributes all the requests from the clients to multiple Ubuntu servers in the cluster.</p>
+  </li>
+  <li>
+    <p><strong><a href="https://www.nginx.com/resources/wiki/">Nginx</a></strong>: Nginx is an open-source web server but can also be used as a load balancer. Nginx has a reputation for its high performance and small memory footprint. It can thrive under heavy load by spawning worker processes, each of which can handle thousands of connections. In the image, nginx is local to one server or instance to handle all the requests from the public facing load balancer. An alternative to nginx is <a href="https://httpd.apache.org/">Apache HTTP Server</a>.</p>
+  </li>
+  <li>
+    <p><strong><a href="http://docs.gunicorn.org/en/stable/">Gunicorn</a></strong>: It is a Python Web Server Gateway Interface (<a href="[WSGI](https://en.wikipedia.org/wiki/Web_Server_Gateway_Interface)">WSGI</a>) HTTP server. It is ported from <a href="https://en.wikipedia.org/wiki/Unicorn_(web_server)">Ruby’s Unicorn project</a>. It is a pre-fork worker model, which means a master creates multiple forks which are called workers to handle the requests. Since Python is not multithreaded, we try to create multiple gunicorn workers which are individual processes that have their own memory allocations to compensate the parallelism for handling requests. Gunicorn works for various Python web frameworks and a well-known alternative is <a href="https://uwsgi-docs.readthedocs.io/en/latest/">uWSGI</a>.</p>
+  </li>
+  <li>
+    <p><strong><a href="http://flask.pocoo.org/">Flask</a></strong>: It is a micro web framework written in Python. It helps us to develop application programming interface (API) or a web application that responds to the request. Other alternatives to Flask are <a href="https://www.djangoproject.com/">Django</a>, <a href="https://trypyramid.com/">Pyramid</a>, and <a href="http://www.web2py.com/">web2py</a>. An extension of Flask to add support for quickly building REST APIs is provided by <a href="https://flask-restful.readthedocs.io/en/latest/">Flask-RESTful</a>.</p>
+  </li>
+  <li>
+    <p><strong><a href="https://keras.io/">Keras</a></strong>: It is an open-source neural network library written in Python. It has the capability to run on top of <a href="https://www.tensorflow.org/">TensorFlow</a>, <a href="https://docs.microsoft.com/en-us/cognitive-toolkit/using-cntk-with-keras">CNTK</a>, <a href="http://deeplearning.net/software/theano/">Theano</a> or <a href="https://aws.amazon.com/blogs/machine-learning/apache-mxnet-incubating-adds-support-for-keras-2/">MXNet</a>. There are plenty of alternatives to Keras: <a href="https://www.tensorflow.org/">TensorFlow</a>, <a href="https://caffe2.ai/">Caffe2</a> (<a href="http://caffe.berkeleyvision.org/">Caffe</a>), <a href="https://docs.microsoft.com/en-us/cognitive-toolkit/using-cntk-with-keras">CNTK</a>, <a href="https://pytorch.org/">PyTorch</a>, <a href="https://mxnet.apache.org/">MXNet</a>, <a href="https://chainer.org/">Chainer</a>, and <a href="http://deeplearning.net/software/theano/">Theano</a> (discontinued).</p>
+  </li>
+  <li>
+    <p><strong><a href="https://en.wikipedia.org/wiki/Cloud_computing">Cloud Platform</a></strong>: If there is one platform that intertwines all the above-mentioned components, then it is the cloud. It is one of the primary catalysts for the proliferation in the research of Artificial Intelligence, be it Computer Vision, Natural Language Processing, Machine Learning, Machine Translation, Robotics or Medical Imaging. Cloud has made computational resources accessible to a wider audience at a reasonable cost. Few of the well-known cloud web services are <a href="https://aws.amazon.com/">Amazon Web Services</a> (AWS), <a href="https://cloud.google.com/">Google Cloud</a> and <a href="https://azure.microsoft.com/en-in/">Microsoft Azure</a>.</p>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="architecture-setup">Architecture Setup</h3>
+
+<p>By now you should be familiar with the components mentioned in the earlier sections. In the following section, Let’s understand the setup from an API perspective since this forms the base for a web application as well.</p>
+
+<p><strong>Note</strong>: <em>This architecture setup will be based on Python.</em></p>
+
+<h3 id="development-setup">Development Setup</h3>
+
+<ul>
+  <li>
+    <p><strong>Train the model</strong>: The first step is to train the model based on the use case using <a href="https://keras.io/">Keras</a> or <a href="https://www.tensorflow.org/">TensorFlow</a> or <a href="https://pytorch.org/">PyTorch</a>. Make sure you do this in a <a href="https://virtualenv.pypa.io/en/stable/">virtual environment</a>, as it helps in isolating multiple Python environments and also it packs all the necessary dependencies into a separate folder.</p>
+  </li>
+  <li>
+    <p><strong>Build the API</strong>: Once the model is good to go into an API, you can use <a href="http://flask.pocoo.org/">Flask</a> or <a href="https://www.djangoproject.com/">Django</a> to build them based on the requirement. Ideally, you have to build <a href="https://en.wikipedia.org/wiki/Representational_state_transfer">Restful</a> APIs, since it helps in separating between the client and the server; improves visibility, reliability, and scalability; it is platform agnostic. Perform a thorough test to ensure the model responds with the correct predictions from the API.</p>
+  </li>
+  <li>
+    <p><strong>Web Server</strong>: Now is the time to test the web server for the API that you have built. Gunicorn is a good choice if you have built the APIs using Flask. An example command to run the gunicorn web server.</p>
+  </li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">gunicorn</span> <span class="o">--</span><span class="n">workers</span> <span class="mi">1</span> <span class="o">--</span><span class="n">timeout</span> <span class="mi">300</span> <span class="o">--</span><span class="n">bind</span> <span class="mf">0.0</span><span class="o">.</span><span class="mf">0.0</span><span class="p">:</span><span class="mi">8000</span> <span class="n">api</span><span class="p">:</span><span class="n">app</span>
+  <span class="o">-</span> <span class="n">workers</span> <span class="p">(</span><span class="n">INT</span><span class="p">):</span> <span class="n">The</span> <span class="n">number</span> <span class="n">of</span> <span class="n">worker</span> <span class="n">processes</span> <span class="k">for</span> <span class="n">handling</span> <span class="n">requests</span><span class="o">.</span>
+  <span class="o">-</span> <span class="n">timeout</span> <span class="p">(</span><span class="n">INT</span><span class="p">):</span> <span class="n">Workers</span> <span class="n">silent</span> <span class="k">for</span> <span class="n">more</span> <span class="n">than</span> <span class="n">this</span> <span class="n">many</span> <span class="n">seconds</span> <span class="n">are</span> <span class="n">killed</span> <span class="ow">and</span> <span class="n">restarted</span><span class="o">.</span>
+  <span class="o">-</span> <span class="n">bind</span> <span class="p">(</span><span class="n">ADDRESS</span><span class="p">):</span> <span class="n">The</span> <span class="n">socket</span> <span class="n">to</span> <span class="n">bind</span><span class="o">.</span> <span class="p">[[</span><span class="s">'127.0.0.1:8000'</span><span class="p">]]</span>
+  <span class="o">-</span> <span class="n">api</span><span class="p">:</span> <span class="n">The</span> <span class="n">main</span> <span class="n">Python</span> <span class="nb">file</span> <span class="n">containing</span> <span class="n">the</span> <span class="n">Flask</span> <span class="n">application</span><span class="o">.</span>
+  <span class="o">-</span> <span class="n">app</span><span class="p">:</span> <span class="n">An</span> <span class="n">instance</span> <span class="n">of</span> <span class="n">the</span> <span class="n">Flask</span> <span class="k">class</span> <span class="nc">in</span> <span class="n">the</span> <span class="n">main</span> <span class="n">Python</span> <span class="nb">file</span> <span class="s">'api.py'</span><span class="o">.</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p><strong>Load Balancer</strong>: You can configure nginx to handle all the test requests across all the gunicorn workers, where each worker has its own API with the DL model. Refer this <a href="https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-gunicorn-and-nginx-on-ubuntu-16-04">resource</a> to understand the setup between nginx and gunicorn.</p>
+  </li>
+  <li>
+    <p><strong>Load / Performance Testing</strong>: Take a stab at <a href="https://jmeter.apache.org/">Apache Jmeter</a>, an open-source application designed to load test and measure performance. This will also help in understanding nginx load distribution. Alternative is <a href="https://locust.io/">Locust</a>.</p>
+  </li>
+</ul>
+
+<h3 id="production-setup">Production Setup</h3>
+
+<ul>
+  <li>
+    <p><strong>Cloud Platform</strong>: After you have chosen the cloud service, set up a machine or instance from a standard Ubuntu image (preferably the latest  LTS version). The choice of CPU machine really depends on the DL model and the use case. Once the machine is running, setup nginx, Python virtual environment, install all the dependencies and copy the API. Finally, try running the API with the model (it might take a while to load all the model(s) based on the number of workers that are defined for gunicorn).</p>
+  </li>
+  <li>
+    <p><strong>Custom API image</strong>: Ensure the API is working smoothly and then snapshot the instance to create the custom image that contains the API and model(s). Snapshot will preserve all the settings of the application. Reference: <a href="https://docs.aws.amazon.com/toolkit-for-visual-studio/latest/user-guide/tkv-create-ami-from-instance.html">AWS</a>, <a href="https://cloud.google.com/compute/docs/images/create-delete-deprecate-private-images">Google</a>, and <a href="https://docs.microsoft.com/en-us/azure/virtual-machines/linux/tutorial-custom-images">Azure</a>.</p>
+  </li>
+  <li>
+    <p><strong>Load Balancer</strong>: Create a load balancer from the cloud service, it can be either public or private based on the requirement. Reference: <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-getting-started.html">AWS</a>, <a href="https://cloud.google.com/load-balancing/">Google</a>, and <a href="https://docs.microsoft.com/en-us/azure/load-balancer/quickstart-create-basic-load-balancer-portal">Azure</a>.</p>
+  </li>
+  <li>
+    <p><strong>A Cluster of instances</strong>: Use the previously created custom API image to launch a cluster of instances. Reference: <a href="https://aws.amazon.com/premiumsupport/knowledge-center/launch-instance-custom-ami/">AWS</a>, <a href="https://cloud.google.com/compute/docs/instances/creating-instance-with-custom-machine-type">Google</a>, and <a href="https://docs.microsoft.com/en-us/azure/virtual-machines/windows/create-vm-generalized-managed">Azure</a>.</p>
+  </li>
+  <li>
+    <p><strong>Load Balancer for the Cluster</strong>: Now, link the cluster of instances to a load balancer, this will ensure the load balancer to distribute work equally among all the instances. Reference: <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-deregister-register-instances.html">AWS</a>, <a href="https://cloud.google.com/compute/docs/load-balancing/http/backend-service">Google</a>, and <a href="https://docs.microsoft.com/en-us/azure/load-balancer/quickstart-create-basic-load-balancer-portal">Azure</a>.</p>
+  </li>
+  <li>
+    <p><strong>Load/Performance Test</strong>: Just like the load/performance testing in the development, a similar procedure can be replicated in production, but now with millions of requests. Try breaking the architecture to check it’s stability and reliability (not always advisable).</p>
+  </li>
+  <li>
+    <p><strong>Wrap-up</strong>: Finally, if everything works as expected, you’ll have your first production level DL architecture to serve millions of requests.</p>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="additional-setup-add-ons">Additional Setup (Add-ons)</h3>
+
+<p>Apart from the usual setup, there are few other things to take care of to make the setup self-sustaining for the long run.</p>
+
+<ul>
+  <li>
+    <p><strong>Auto-scaling</strong>: It is a feature in cloud service that helps in scaling up the instances in for the application based on the number of requests received. We can scale-out when there is a spike in the requests and scale-in when the requests have reduced. Reference: <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html">AWS</a>, <a href="https://cloud.google.com/compute/docs/autoscaler/">Google</a>, and <a href="https://docs.microsoft.com/en-us/azure/architecture/best-practices/auto-scaling">Azure</a>.</p>
+  </li>
+  <li>
+    <p><strong>Application updates</strong>: There comes a time when you have to update the application with a latest DL model or update the features of the application, but how to update all the instances without affecting the behavior of the application in production. Cloud services provide a way to perform this task in various ways and they can be very specific to a particular cloud service provider. Reference: <a href="https://aws.amazon.com/premiumsupport/knowledge-center/auto-scaling-group-rolling-updates/">AWS</a>, <a href="https://cloud.google.com/compute/docs/instance-groups/updating-managed-instance-groups">Google</a>, and <a href="https://azure.microsoft.com/en-in/updates/auto-os-upgrades/">Azure</a>.</p>
+  </li>
+  <li>
+    <p><strong>Continuous Integration</strong>: It refers to the build and unit testing stages of the software release process. Every revision that is committed triggers an automated build and test. This can be used to deploy latest versions of the models into production.</p>
+  </li>
+</ul>
+
+<p><img src="/assets/img/continuous_integration.png" alt="Source: https://aws.amazon.com/devops/continuous-integration/" />
+Source: <em><a href="https://aws.amazon.com/devops/continuous-integration/">AWS</a></em></p>
+
+<hr />
+
+<h3 id="alternate-platforms">Alternate platforms</h3>
+
+<p>There are other systems that provide a structured way to deploy and serve models in the production and few such systems are as follows:</p>
+
+<ul>
+  <li><strong><a href="https://www.tensorflow.org/serving/">TensorFlow Serving</a></strong>: It is an open-source platform software library for serving machine learning models. It’s primary objective based on the inference aspect of machine learning, taking trained models after training and managing their lifetimes. It has out-of-the-box support for TensorFlow models.</li>
+</ul>
+
+<p><img src="/assets/img/tf_serving_1.png" alt="TensorFlow Serving" /><br />
+Source: <em><a href="https://opensource.googleblog.com/2016/02/running-your-models-in-production-with.html">TensorFlow Serving</a></em></p>
+
+<ul>
+  <li><strong><a href="https://github.com/floydhub/dl-docker">Docker</a></strong>: It is a container virtualization technology which behaves similarly to a light-weighted virtual machine. It provides a neat way to isolate an application with its dependencies for later use in any operating system. We  can have multiple docker images with different applications running on the same instance but without sharing the same resources.</li>
+</ul>
+
+<p><img src="/assets/img/docker_architecture.jpg" alt="Docker" /><br />
+Source: <em><a href="https://codingpackets.com/virtualization/docker/">Docker Architecture</a></em></p>
+
+<ul>
+  <li><strong><a href="https://eng.uber.com/michelangelo/">Michelangelo</a></strong>: It is Uber’s Machine Learning platform, which includes building, deploying and operating ML solutions at Uber’s scale. </li>
+</ul>
+
+<p><img src="/assets/img/uber_1.png" alt="Michelangelo" /><br />
+Source: <em><a href="https://eng.uber.com/michelangelo/">Michelangelo</a></em></p>
+
+<h3 id="additional-resources">Additional Resources</h3>
+
+<ul>
+  <li><a href="https://www.pyimagesearch.com/2017/12/11/image-classification-with-keras-and-deep-learning/">Image classification with Keras</a></li>
+  <li><a href="https://pytorch.org/tutorials/beginner/transfer_learning_tutorial.html">Transfer learning in PyTorch</a></li>
+  <li>Flask API for Keras model [<a href="https://blog.keras.io/building-a-simple-keras-deep-learning-rest-api.html">1</a>] [<a href="https://www.pyimagesearch.com/2018/01/29/scalable-keras-deep-learning-rest-api/">2</a>]</li>
+  <li><a href="https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-gunicorn-and-nginx-on-ubuntu-16-04">Nginx and Gunicorn for Flask</a> </li>
+  <li><a href="https://locust.io/">Locust</a></li>
+</ul>
+
+<p>I hope you found this article useful and understood the overview of the deployment process of Deep/Machine Learning models from development to production.</p>
+
+
+<span class="post-date">
+  Written on
+  
+  June
+  25th,
+  2018
+  by
+  
+    Mahesh Kumar K
+  
+</span>
+
+<div class="post-date">Feel free to share!</div>
+  <div class="sharing-icons">
+    <a href="https://twitter.com/intent/tweet?text=A guide to deploying Machine/Deep Learning model(s) in Production&amp;url=/article/a-guide-to-deploying-machine-learning-models-in-production.html" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=/article/a-guide-to-deploying-machine-learning-models-in-production.html&amp;title=A guide to deploying Machine/Deep Learning model(s) in Production" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+    <a href="https://plus.google.com/share?url=/article/a-guide-to-deploying-machine-learning-models-in-production.html" target="_blank"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+  </div>
+</div>
+
+
+<div class="related">
+  <h1 >You may also enjoy:</h1>
+  
+  <ul class="related-posts">
+    
+      
+        
+        
+      
+        
+          <li>
+            <h3>
+              <a href="/article/multiclass-classification.html">
+                Multiclass Classification
+                <!--<img src="http://localhost:4000/images/">-->
+                <!--<small>March 28, 2017</small>-->
+              </a>
+            </h3>
+          </li>
+          
+        
+      
+        
+          <li>
+            <h3>
+              <a href="/article/anatomy-of-natural-language-processing.html">
+                Anatomy of Natural Language Processing
+                <!--<img src="http://localhost:4000/images/">-->
+                <!--<small>March 13, 2017</small>-->
+              </a>
+            </h3>
+          </li>
+          
+        
+      
+    
+  </ul>
+</div>
+
+
+
+  <section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = "www-maheshkumar-xyz";
+    var disqus_identifier = "/article/a-guide-to-deploying-machine-learning-models-in-production.html";
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+    </div>
+
+    <footer class="footer">
+  
+  
+  
+    <a href="https://www.github.com/maheshkkumar" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a>
+  
+
+  
+  
+    <a href="https://twitter.com/maheshkumark_" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+  
+
+  
+  
+    <a href="https://www.linkedin.com/in/maheshkumark" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+  
+
+  
+  
+    <a href="mailto:maheshk2194@gmail.com" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+  
+
+  
+  
+    <a href="/rss-feed.xml"><i class="fa fa-rss-square" aria-hidden="true"></i></a>
+  
+
+  <!-- <div class="post-date"><a href="/menu/about.html">Mahesh Kumar |  by Mahesh Kumar</a></div> -->
+  <div class="post-date">Theme Courtesy -<a href="https://github.com/LeNPaul/Lagrange">Lagrange</a><i class="fas fa-thumbs-up"></i></div>
+</footer>
+
+  </div>
+
+</body>
+</html>

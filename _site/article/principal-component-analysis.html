@@ -1,0 +1,447 @@
+<!doctype html>
+<html>
+
+<head>
+
+  <title>
+    
+      Principal Component Analysis | Mahesh Kumar
+    
+  </title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/syntax.css">
+  <!-- Use Atom -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/rss-feed.xml" title="Mahesh Kumar" />
+  <!-- Use RSS-2.0 -->
+  <!--<link href="/rss-feed.xml" type="application/rss+xml" rel="alternate" title="Mahesh Kumar | "/>
+  //-->
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quattrocento+Sans">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <script type="text/javascript" async
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+
+  <!-- Google Analytics -->
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-82492711-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <!-- Use Jekyll SEO plugin -->
+  <!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>Principal Component Analysis | Mahesh Kumar</title>
+<meta name="generator" content="Jekyll v3.6.2" />
+<meta property="og:title" content="Principal Component Analysis" />
+<meta name="author" content="Mahesh Kumar K" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This article is divided into two sections, the first section deals with the pictorial explanation of Principal Component Analysis (PCA) and the second section deals with mathematical explanation of PCA." />
+<meta property="og:description" content="This article is divided into two sections, the first section deals with the pictorial explanation of Principal Component Analysis (PCA) and the second section deals with mathematical explanation of PCA." />
+<link rel="canonical" href="http://localhost:4000/article/principal-component-analysis.html" />
+<meta property="og:url" content="http://localhost:4000/article/principal-component-analysis.html" />
+<meta property="og:site_name" content="Mahesh Kumar" />
+<meta property="og:image" content="http://localhost:4000/principal_components.jpeg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2016-12-22T16:47:14+05:30" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Principal Component Analysis","dateModified":"2016-12-22T16:47:14+05:30","datePublished":"2016-12-22T16:47:14+05:30","image":"http://localhost:4000/principal_components.jpeg","url":"http://localhost:4000/article/principal-component-analysis.html","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/article/principal-component-analysis.html"},"author":{"@type":"Person","name":"Mahesh Kumar K"},"description":"This article is divided into two sections, the first section deals with the pictorial explanation of Principal Component Analysis (PCA) and the second section deals with mathematical explanation of PCA.","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+</head>
+
+
+<body>
+
+  <div class="container">
+    <header class="masthead">
+  <h3 class="masthead-title">
+    <a href="/">Mahesh Kumar</a>
+    <!-- <small class="masthead-subtitle"></small> -->
+    <div class="menu">
+  <nav class="menu-content">
+    
+      <a href="/menu/about.html">About</a>
+    
+  </nav>
+  <nav class="social-icons">
+    
+  
+  
+    <a href="https://www.github.com/maheshkkumar" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a>
+  
+
+  
+  
+    <a href="https://twitter.com/maheshkumark_" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+  
+
+  
+  
+    <a href="https://www.linkedin.com/in/maheshkumark" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+  
+
+  
+  
+    <a href="mailto:maheshk2194@gmail.com" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+  
+
+  
+  
+    <a href="/rss-feed.xml"><i class="fa fa-rss-square" aria-hidden="true"></i></a>
+  
+
+  </nav>
+</div>
+
+  </h3>
+</header>
+
+
+    <div class="post-container">
+      <h1>
+  Principal Component Analysis
+</h1>
+
+
+  <img src="/assets/img/principal_components.jpeg">
+
+
+<p>This article is divided into two sections, the first section deals with the pictorial explanation of Principal Component Analysis (PCA) and the second section deals with mathematical explanation of PCA.</p>
+
+<h2 id="pictorial-representation">Pictorial Representation</h2>
+
+<h3 id="1-what-is-principal-component-analysis">1. <strong>What is Principal Component Analysis?</strong></h3>
+
+<p>The simplest answer would be that it is an analysis of finding the principal components in the given data set.<br />
+ 
+It is often useful to measure the data in terms of it’s principal components instead of the normal 2 dimensional plane of x-y axis. The principal components are the underlying structure in the data. They represent the directions in which the data has maximum variance and also the directions in which the data is most spread out.</p>
+
+<p>Let’s consider the the diagram show below to understand the above statements.</p>
+
+<p><img src="/assets/img/pc1.png" alt="Data Set" /></p>
+
+<p>Imagine that the green circles are the data points of a data set. In order to find the direction of maximum variance, fit a straight line in the data set where the data is most spread out. A vertical line with the data points projected on to it will look like the diagram show below.</p>
+
+<p><img src="/assets/img/pc2.png" alt="Data Set" /></p>
+
+<p>It looks like the line doesn’t show the direction of maximum variance in the data set. It is probably not the principal component.</p>
+
+<p>A better fit would be a horizontal line and the data points projection is show in the diagram below.</p>
+
+<p><img src="/assets/img/pc3.png" alt="Data Set" /></p>
+
+<p>Oh yeah, this looks much better and the data is way more spread out on this line, it has maximum variance and with more analysis we can conclude that there cannot be any other line that has maximum variance. Thus, we can say that the horizontal line is the principal component for the above data set.</p>
+
+<h3 id="2-eigenvectors-and-eigenvalues">2. <strong>Eigenvectors and Eigenvalues</strong></h3>
+
+<p>In any data set, we can deconstruct the data into eigenvectors and eigenvalues. Eigenvectors and values exist in pairs. Every eigenvector has a corresponding eigenvalue.
+ 
+When we consider the example that we previously used, <strong>eigenvector was the direction of the line (vertical or horizontal) drawn to find the maximum variance</strong>. An eigenvalue is just a number, it tells us how much variance exists in the data in a particular direction and in the previous example an <strong>eigenvalue was a number that tells us how the data set is spread out on the line which is an eigenvector</strong>. </p>
+
+<p>Therefore, an eigenvector with the highest eigenvalue is the <strong>Principal Component</strong>.</p>
+
+<p>It turns out that there were not many eigenvectors or eigenvalues in the previous example. For a fact the number of eigenvectors and eigenvalues that exist equals the number of dimensions of a data set.</p>
+
+<p>Say you are measuring the age and attendance of each student in a classroom. So, the two variables are age and attendance of students. Therefore the data set is 2 dimensional and it has 2 eigenvectors and eigenvalues.</p>
+
+<p>If you were to measure the age, attendance and percentage of each student in a classroom, this leads to a 3 dimensional data set given the 3 variables. Therefore it will have 3 eigenvectors and eigenvalues.</p>
+
+<p>This might sound confusing and might be complicated, let’s make it clear using some diagrams.</p>
+
+<p><img src="/assets/img/pc4.png" alt="Data Set" /></p>
+
+<p>At the moment the data set which is depicted in oval shape on the x-y axis, where x could be the age and y could be the attendance. These are the 2 dimensions that are currently used to measure the data set.</p>
+
+<p>As already discussed there is a principal component or a line that will split the data set for maximum variance as show below.</p>
+
+<p><img src="/assets/img/pc5.png" alt="Data Set" /></p>
+
+<p>From the above diagram, we get one eigenvector and the second eigenvector will be <strong>perpendicular or orthogonal</strong> to the first one. The reason the two eigenvectors are orthogonal to each other is because the eigenvectors should be able to span the whole x-y area.</p>
+
+<p><img src="/assets/img/pc6.png" alt="Data Set" /></p>
+
+<p>The eigenvectors have given us a much more useful axis to frame the data set. We can now re-produce the above data set with the new dimensions.</p>
+
+<p><img src="/assets/img/pc7.png" alt="Data Set" /></p>
+
+<p>Just to make it clear, we didn’t mess with the data set, we just changed the view of angle of the data set with the new x’-y’ axis. These axes are much more intuitive to the shape of the data set. These directions give the most variation and provide us with more information. In case, there was no variation in the data set, then everything would be equal to 1 and it would have been such a boring statistic and the eigenvalue would be zero.</p>
+
+<h2 id="mathematical-representation">Mathematical Representation</h2>
+
+<p>In this section, let’s consider the mathematics point of view to understand the PCA and learn some basic statistics along the way to achieve our goal of figuring out PCA.</p>
+
+<h3 id="1-mean">1. <strong>Mean</strong></h3>
+
+<p>Mean is the average value of the entire data. Let’s consider a group of students, in order to find the mean of their age, we will add up the age of every student and divide the sum by the total number of students.</p>
+
+<p><img src="/assets/img/mean.PNG" alt="Mean" /></p>
+
+<h3 id="2-variance">2. <strong>Variance</strong></h3>
+
+<p>It is the measure of the spread of the date in the data set using the mean. When we consider the group of students example, variance is the sum of the squared difference between the age of each student and the mean age value, then the sum is divided by the number of students.</p>
+
+<p><img src="/assets/img/variance.PNG" alt="Variance" /></p>
+
+<p>Variance can also be represented as the measure of the deviation from the mean for the points in one dimension.</p>
+
+<h3 id="3-covariance">3. <strong>Covariance</strong></h3>
+
+<p>It is a measure of how much each of the dimensions vary from the mean with respect to each other.</p>
+
+<p>The covariance is measured between 2 dimensions to see if there is relationship between the 2 dimensions, e.g., relationship between the height and weight of students.</p>
+
+<p>The covariance of one dimension is variance.</p>
+
+<p><img src="/assets/img/covariance.PNG" alt="covariance" /></p>
+
+<p>A <strong>positive value</strong> of covariance indicates that both the dimensions are <strong>directly proportional</strong> to each other, where if one dimension increases the other dimension increases accordingly.</p>
+
+<p>A <strong>negative value</strong> of covariance indicates that both the dimensions are <strong>indirectly proportional</strong> to each other, where if one dimension increases then other dimension decreases accordingly.</p>
+
+<p>If in case the <strong>covariance is zero</strong>, then the two dimensions are <strong>independent</strong> of each other.</p>
+
+<p>One of the major purpose of covariance is to find the relationship between dimensions in high dimensional data set, usually dimensions greater than 3, where the visualization is tricky.</p>
+
+<p>We can also represent the dimensions of a higher dimensional data set in terms of <strong>covariance matrix</strong>. Let’s consider the example of a 3 dimensional data set, then the covariance matrix can be represented as follows</p>
+
+<p><img src="/assets/img/covariance_matrix.PNG" alt="covariance" /></p>
+
+<h3 id="4-transformation-matrices">4. <strong>Transformation Matrices</strong></h3>
+
+<p>Consider the following 2 dimensional matrix multiplied by a vector.</p>
+
+<p><img src="/assets/img/matrix_transformations.PNG" alt="Matrix Transformations" /></p>
+
+<p>Now, assume we take a multiple of (3,2) vector and multiply it with the 2 dimensional matrix.</p>
+
+<p><img src="/assets/img/matrix_transformations_2.PNG" alt="Matrix Transformations" />
+<img src="/assets/img/matrix_transformations_3.PNG" alt="Matrix Transformations" /></p>
+
+<p>From the above two operations, what did we understand?</p>
+
+<ul>
+  <li>
+    <p>A vector consists of both length and direction. Scaling a vector by a value only changes it’s length and not it’s direction. This is an important observation in the transformation of matrices leading to form <strong>eigenvectors</strong> and <strong>eigenvalues</strong>.</p>
+  </li>
+  <li>
+    <p>Irrespective of how much we scale the vector (3,2) by, the solution under the transformation matrix is always a multiple of 4.</p>
+  </li>
+</ul>
+
+<h3 id="5-eigenvalue-problem">5. <strong>Eigenvalue Problem</strong></h3>
+
+<p>The eigenvalue problem is any problem of the form:</p>
+
+<p><img src="/assets/img/eigen_problem_2.PNG" alt="Matrix Transformations" /></p>
+
+<p>Any value of lambda for which the above equation has a solution is called the <strong>eigenvalue</strong> for <strong>A</strong> and the vector v which corresponds to this value is called the <strong>eigenvector</strong> of <strong>A</strong>.</p>
+
+<p>Going back to our above example:</p>
+
+<p><img src="/assets/img/eigen_problem_3.PNG" alt="Matrix Transformations" /></p>
+
+<h3 id="6-noise">6. <strong>Noise</strong></h3>
+
+<p>Noise in any data must be low or — no matter the analysis technique — no information about a system can be extracted.</p>
+
+<p>There exists no absolute scale for the noise but rather it is measured relative to the measurement, e.g. recorded ball positions.</p>
+
+<p>A common measure is the <em>signal-to-noise ration (SNR)</em>, or a ration of variances.</p>
+
+<p><img src="/assets/img/signal_to_noise.PNG" alt="Signal to Noise" /></p>
+
+<p>A high <em>SNR (»1)</em> indicates high precision data, while a low <em>SNR</em> indicates noise contaminated data.</p>
+
+<h3 id="7-covariance-matrix">7. <strong>Covariance Matrix</strong></h3>
+
+<p>Assuming zero mean data (subtracting the mean from each data value), consider the indexed vectors <em>{x1, x2, …., xm}</em> which are the rows of an m x n matrix <strong>X</strong>.</p>
+
+<p>Each row corresponds to all measurements of a particular measurement type <em>(xi)</em>.</p>
+
+<p>Each column of <strong>X</strong> corresponds to a set of measurements from a particular time instant.</p>
+
+<p>We can now define our covariance matrix <strong>Sx</strong>.</p>
+
+<p><img src="/assets/img/covariance_matrix_2.PNG" alt="Matrix Transformations" /></p>
+
+<ul>
+  <li><strong>Sx</strong> is a square symmetric m x m matrix.</li>
+  <li>The <strong>diagonal terms</strong> of <strong>Sx</strong> are the <strong>variance</strong> of particular measurement types.</li>
+  <li>The <strong>off-diagonal</strong> terms of <strong>Sx</strong> are the <strong>covariance</strong> between the measurement types.</li>
+</ul>
+
+<h3 id="8-solving-pca-eigen-vectors-of-covariance-matrix">8. <strong>Solving PCA: Eigen Vectors of Covariance Matrix</strong></h3>
+
+<p>Let’s derive our first algebraic solution to PCA using linear algebra. This solution is based on the property of eigenvector decomposition.</p>
+
+<p>The goal is summarized as follows:</p>
+
+<ul>
+  <li>Find some orthonormal matrix <strong>P</strong> where <strong>Y = PX</strong> such that <strong>Sy</strong> is diagonalized. The rows of <strong>P</strong> are the <em>principal components</em> of <strong>X</strong>.</li>
+  <li>We begin by rewriting <strong>Sy</strong> in terms of our variable of choice <strong>P</strong>.</li>
+</ul>
+
+<p><img src="/assets/img/covariance_matrix_3.PNG" alt="Matrix Transformations" /></p>
+
+<ul>
+  <li>A is a symmetric matrix and can also be written as below</li>
+</ul>
+
+<p><img src="/assets/img/covariance_matrix_4.PNG" alt="Matrix Transformations" /></p>
+
+<ul>
+  <li>Now comes the trick. <em>Let’s select the matrix <strong>P</strong> to be a matrix where each row of <strong>P</strong> is an eigenvector</em>.</li>
+</ul>
+
+<p><img src="/assets/img/covariance_matrix_5.PNG" alt="Matrix Transformations" /></p>
+
+<ul>
+  <li>So, it is evident that the choice of <strong>P</strong> diagonalizes <strong>Sy</strong>. This was the goal for PCA.</li>
+</ul>
+
+<p>Hope you found this article useful and understood Principal Component Analysis. </p>
+
+<p><em>Thank you for reading. Peace!</em></p>
+
+
+<span class="post-date">
+  Written on
+  
+  December
+  22nd
+    ,
+  2016
+  by
+  
+    Mahesh Kumar K
+  
+</span>
+
+<div class="post-date">Feel free to share!</div>
+  <div class="sharing-icons">
+    <a href="https://twitter.com/intent/tweet?text=Principal Component Analysis&amp;url=/article/principal-component-analysis.html" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=/article/principal-component-analysis.html&amp;title=Principal Component Analysis" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+    <a href="https://plus.google.com/share?url=/article/principal-component-analysis.html" target="_blank"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+  </div>
+</div>
+
+
+<div class="related">
+  <h1 >You may also enjoy:</h1>
+  
+  <ul class="related-posts">
+    
+      
+        
+          <li>
+            <h3>
+              <a href="/article/a-guide-to-deploying-machine-learning-models-in-production.html">
+                A guide to deploying Machine/Deep Learning model(s) in Production
+                <!--<img src="http://localhost:4000/images/">-->
+                <!--<small>June 25, 2018</small>-->
+              </a>
+            </h3>
+          </li>
+          
+        
+      
+        
+          <li>
+            <h3>
+              <a href="/article/multiclass-classification.html">
+                Multiclass Classification
+                <!--<img src="http://localhost:4000/images/">-->
+                <!--<small>March 28, 2017</small>-->
+              </a>
+            </h3>
+          </li>
+          
+        
+      
+        
+          <li>
+            <h3>
+              <a href="/article/anatomy-of-natural-language-processing.html">
+                Anatomy of Natural Language Processing
+                <!--<img src="http://localhost:4000/images/">-->
+                <!--<small>March 13, 2017</small>-->
+              </a>
+            </h3>
+          </li>
+          
+        
+      
+    
+  </ul>
+</div>
+
+
+
+  <section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = "www-maheshkumar-xyz";
+    var disqus_identifier = "/article/principal-component-analysis.html";
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+    </div>
+
+    <footer class="footer">
+  
+  
+  
+    <a href="https://www.github.com/maheshkkumar" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a>
+  
+
+  
+  
+    <a href="https://twitter.com/maheshkumark_" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+  
+
+  
+  
+    <a href="https://www.linkedin.com/in/maheshkumark" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+  
+
+  
+  
+    <a href="mailto:maheshk2194@gmail.com" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+  
+
+  
+  
+    <a href="/rss-feed.xml"><i class="fa fa-rss-square" aria-hidden="true"></i></a>
+  
+
+  <!-- <div class="post-date"><a href="/menu/about.html">Mahesh Kumar |  by Mahesh Kumar</a></div> -->
+  <div class="post-date">Theme Courtesy -<a href="https://github.com/LeNPaul/Lagrange">Lagrange</a><i class="fas fa-thumbs-up"></i></div>
+</footer>
+
+  </div>
+
+</body>
+</html>

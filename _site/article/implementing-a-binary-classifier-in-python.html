@@ -1,0 +1,432 @@
+<!doctype html>
+<html>
+
+<head>
+
+  <title>
+    
+      Implementing a Binary Classifier in Python | Mahesh Kumar
+    
+  </title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/syntax.css">
+  <!-- Use Atom -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/rss-feed.xml" title="Mahesh Kumar" />
+  <!-- Use RSS-2.0 -->
+  <!--<link href="/rss-feed.xml" type="application/rss+xml" rel="alternate" title="Mahesh Kumar | "/>
+  //-->
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quattrocento+Sans">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <script type="text/javascript" async
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+
+  <!-- Google Analytics -->
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-82492711-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <!-- Use Jekyll SEO plugin -->
+  <!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>Implementing a Binary Classifier in Python | Mahesh Kumar</title>
+<meta name="generator" content="Jekyll v3.6.2" />
+<meta property="og:title" content="Implementing a Binary Classifier in Python" />
+<meta name="author" content="Mahesh Kumar K" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Credits to Jean-Nicholas Hould on his post that gives an intuitive approach to learn a basic Machine Learning algorithm and Sebastian Raschka book on Machine Learning in Python." />
+<meta property="og:description" content="Credits to Jean-Nicholas Hould on his post that gives an intuitive approach to learn a basic Machine Learning algorithm and Sebastian Raschka book on Machine Learning in Python." />
+<link rel="canonical" href="http://localhost:4000/article/implementing-a-binary-classifier-in-python.html" />
+<meta property="og:url" content="http://localhost:4000/article/implementing-a-binary-classifier-in-python.html" />
+<meta property="og:site_name" content="Mahesh Kumar" />
+<meta property="og:image" content="http://localhost:4000/neuron_model.jpg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2017-01-21T16:47:14+05:30" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Implementing a Binary Classifier in Python","dateModified":"2017-01-21T16:47:14+05:30","datePublished":"2017-01-21T16:47:14+05:30","image":"http://localhost:4000/neuron_model.jpg","url":"http://localhost:4000/article/implementing-a-binary-classifier-in-python.html","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/article/implementing-a-binary-classifier-in-python.html"},"author":{"@type":"Person","name":"Mahesh Kumar K"},"description":"Credits to Jean-Nicholas Hould on his post that gives an intuitive approach to learn a basic Machine Learning algorithm and Sebastian Raschka book on Machine Learning in Python.","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+</head>
+
+
+<body>
+
+  <div class="container">
+    <header class="masthead">
+  <h3 class="masthead-title">
+    <a href="/">Mahesh Kumar</a>
+    <!-- <small class="masthead-subtitle"></small> -->
+    <div class="menu">
+  <nav class="menu-content">
+    
+      <a href="/menu/about.html">About</a>
+    
+  </nav>
+  <nav class="social-icons">
+    
+  
+  
+    <a href="https://www.github.com/maheshkkumar" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a>
+  
+
+  
+  
+    <a href="https://twitter.com/maheshkumark_" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+  
+
+  
+  
+    <a href="https://www.linkedin.com/in/maheshkumark" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+  
+
+  
+  
+    <a href="mailto:maheshk2194@gmail.com" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+  
+
+  
+  
+    <a href="/rss-feed.xml"><i class="fa fa-rss-square" aria-hidden="true"></i></a>
+  
+
+  </nav>
+</div>
+
+  </h3>
+</header>
+
+
+    <div class="post-container">
+      <h1>
+  Implementing a Binary Classifier in Python
+</h1>
+
+
+  <img src="/assets/img/neuron_model.jpg">
+
+
+<p><em>Credits to <a href="http://www.jeannicholashould.com/what-i-learned-implementing-a-classifier-from-scratch.html">Jean-Nicholas Hould</a> on his post that gives an intuitive approach to learn a basic Machine Learning algorithm and <a href="https://sebastianraschka.com/books.html">Sebastian Raschka</a> book on Machine Learning in Python.</em></p>
+
+<p>Machine Learning (ML) is playing a key role in a wide range of critical applications, such as Computer Vision, Data Mining, Natural Language Processing, Speech Recognition and others. ML provides potential solutions in all of the above mentioned domains and more, it’s surely going to be the the driving force of our future digital civilization.</p>
+
+<p>ML can be a bit intimidating for a newcomer. The concept of ML might be quite abstract and the newcomer might be bombarding himself with multiple questions. One big question being, “How does it work?”.</p>
+
+<p>In order to explain this, I decided to write a Binary Classifier from scratch. I will not be making use of <em>Scikit-learn</em> in this post. The imperative of this post is to understand the core working principle of an ML algorithm.</p>
+
+<h2 id="what-is-a-binary-classifier">What is a Binary Classifier?</h2>
+
+<p>Let’s consider a scenario where you are told to seperate a basket full of Apples and Oranges into two seperate baskets.</p>
+
+<p><img src="/assets/img/apples-and-oranges.png" alt="Apples and Oranges" /></p>
+
+<h3 id="so-what-do-you-do">So, what do you do?</h3>
+<ul>
+  <li>You might look at the color</li>
+  <li>You might look at the shape or the dimensions</li>
+  <li>You might feel the difference in the texture</li>
+  <li>You might feel the difference in the weights</li>
+</ul>
+
+<p>Afer you find the difference between the two, then you’ll seperate them.</p>
+
+<p>Now, let’s explain the Binary Classifier from the above scenario.</p>
+
+<ol>
+  <li>Firstly, you get the data to solve your problem. (Basket full of Apples and Oranges)</li>
+  <li>Secondly, you create a feature set, which uniquely defines each data. (Your assumptions like color, size, weights and etc.)</li>
+  <li>Thirdly, you are able to label or categorize each data. (Apple or Orange)</li>
+  <li>Fourthly, you have learnt to differentiate the data during the entire process. (In future, you’ll be able to differentiate between an Apple and a Orange)</li>
+</ol>
+
+<p>A <strong>Classifier</strong> in Machine Learning is an <em>algorithm</em>, that will determine the class to which the input data belongs to based on a set of features.</p>
+
+<h3 id="types-of-problems-in-machine-learning">Types of problems in Machine Learning:</h3>
+<ol>
+  <li><em>Supervised Learning</em></li>
+  <li><em>Unsupervised Learning</em></li>
+  <li><em>Reinforcement Learning</em></li>
+</ol>
+
+<p>A Binary Classifier is an instance of Supervised Learning. In Supervised Learning we have a set of input data and a set of labels, our task is to map each data with a label. A Binary Classifier classifies elements into two groups, either <strong>Zero</strong> or <strong>One</strong>.</p>
+
+<h3 id="machine-learning-pipeline">Machine Learning Pipeline</h3>
+
+<ol>
+  <li><em>Data Preprocessing</em></li>
+  <li><em>Learning</em></li>
+  <li><em>Evaluation</em></li>
+  <li><em>Prediction</em></li>
+</ol>
+
+<p><img src="/assets/img/perceptron_algorithm.PNG" alt="Perceptron Algorithm" /></p>
+
+<h3 id="1-data-preprocessing">1. Data Preprocessing</h3>
+
+<p>As Machine Learning algorithms learn from the data, we are obliged to feed them the right kind of data. So, the step towards achieving that is via <em>Data Preprocessing</em>.</p>
+
+<p>Data Preprocessing is a data mining technique that involves transforming the raw data into an understandable format. Real-world data is often incomplete, noisy, inconsistent or unreliable and above all it might be unstructured.</p>
+
+<p>In simple terms, Data Preprocessing implies grooming the raw data according to your requirement using certain techniques.</p>
+
+<h4 id="steps-involved-in-data-preprocessing">Steps involved in Data Preprocessing:</h4>
+<ol>
+  <li><em>Data Cleaning</em> - Fill in the missing values, detect and remove noisy data and outliers.</li>
+  <li><em>Data Transformation</em> - Normalize data to reduce dimensions and noise.</li>
+  <li><em>Data Reduction</em> - Sample data records or attributes for easier data handling.</li>
+  <li><em>Data Discretization</em> - Convert continuous attributes to categorical attributes for ease of use with certain machine learning methods.</li>
+  <li><em>Text Cleaning</em> - Remove embedded characters which may cause data misalignment, for e.g., embedded tabs in a tab-separated data file, embedded new lines which may break records, etc.</li>
+</ol>
+
+<h3 id="2-learning">2. Learning</h3>
+
+<p>Once you have your dataset after preprocessing, then it’s time to select a <em>learning algorithm</em> to perform your desired task. In our case it’s <em>Binary Classifier or a Perceptron</em>.</p>
+
+<h4 id="parameters-to-consider-while-choosing-a-learning-algorithm">Parameters to consider, while choosing a learning algorithm:</h4>
+<ol>
+  <li><em>Accuracy</em></li>
+  <li><em>Training Time</em></li>
+  <li><em>Linearity</em></li>
+  <li><em>Number of Parameters</em></li>
+  <li><em>Number of Features</em></li>
+</ol>
+
+<h3 id="3-evaluation">3. Evaluation</h3>
+
+<p>The metrics that you choose to evaluate the machine learning algorithm are very important. The choice of metrics influences how the performance of machine learning is measured and compared.</p>
+
+<h4 id="classification-metrics">Classification Metrics</h4>
+<ol>
+  <li><em>Classification Accuracy</em></li>
+  <li><em>Logarithmic Loss</em></li>
+  <li><em>Area Under ROC Curve</em></li>
+  <li><em>Confusion Matrix</em></li>
+  <li><em>Classification Report</em></li>
+</ol>
+
+<h4 id="regression-metrics">Regression Metrics</h4>
+<ol>
+  <li><em>Mean Absolute Error</em></li>
+  <li><em>Mean Squared Error</em></li>
+  <li><em>R-Squared</em></li>
+</ol>
+
+<h2 id="implementing-the-perceptron">Implementing the Perceptron</h2>
+
+<p><em>A Perceptron is an algorithm for learning a binary classifier: a function that maps it’s input x to an output value f(x)</em></p>
+
+<h3 id="algorithm">Algorithm</h3>
+
+<p><img src="/assets/img/perceptron.PNG" alt="Perceptron Algorithm" /></p>
+
+<p><img src="/assets/img/perceptron_1.PNG" alt="Perceptron Algorithm" /></p>
+
+<h5 id="where">Where,</h5>
+<ol>
+  <li><em>w</em> is a vector of real-value weights</li>
+  <li><em>w.x</em> is a dot product</li>
+  <li><em>b</em> is the bias</li>
+</ol>
+
+<p>The value of <em>f(x)</em> is either <strong>0</strong> or <strong>1</strong>, which is used to classify <em>x</em> as either a positive or a negative instance.</p>
+
+<h2 id="implementation">Implementation</h2>
+
+<p>Let’s implement the perceptron to predict the outcome of an <strong>OR</strong> gate.</p>
+
+<ol>
+  <li>
+    <p>Let’s initialize an array with initial weights equal to <strong>0</strong>. The length of the array is equal to <strong>number of features + 1</strong>. The additional feature is the “threshold”.</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     <span class="bp">self</span><span class="o">.</span><span class="n">weight_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>The loop “iterates” multiple times over the training data to optimize the weights of the dataset.</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">number_of_iterations</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>We loop over each training data point and it’s target. The target is the desired output which we want the algorithm to predict. As it’s a binary classifier, the targeted ouput is either a <strong>0</strong> or <strong>1</strong>.</p>
+
+    <p>The prediction calculation is a matrix multiplication of the features with the appropirate weights. To this multiplication we add the “threshold” value.</p>
+
+    <p>If the resulting value is above <strong>0</strong>, then the predicted category is <code>1</code>.</p>
+
+    <p>If the resulting value is below <strong>0</strong>, the the predicted category is <code>0</code>.</p>
+
+    <p>At each iteration, if the prediction is not accurate, the algorithm will adjust the weights. The adjustment of the weights will be done proportionally to the difference between the target and predicted value.</p>
+
+    <p>The difference is then mulitplied by the <strong>learning rate <code>(rate)</code></strong>. Higher the value of <code>rate</code>, larger the correction of weights. The algorithm will stop to adjust the weights when the predicted value becomes accurate.</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     <span class="bp">self</span><span class="o">.</span><span class="n">weight_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+     <span class="c"># Iterating multiple times to optimize the weights.</span>
+     <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">number_of_iterations</span><span class="p">):</span>
+         <span class="k">for</span> <span class="n">xi</span><span class="p">,</span> <span class="n">target</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+             <span class="n">update</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rate</span> <span class="o">*</span> <span class="p">(</span><span class="n">target</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">xi</span><span class="p">))</span>
+             <span class="bp">self</span><span class="o">.</span><span class="n">weight_matrix</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">+=</span> <span class="n">update</span> <span class="o">*</span> <span class="n">xi</span>
+             <span class="bp">self</span><span class="o">.</span><span class="n">weight_matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="n">update</span>
+
+     <span class="k">def</span> <span class="nf">dot_product</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+         <span class="s">""" Calculate the dot product """</span>
+         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight_matrix</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight_matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+     <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+         <span class="s">""" Predicting the label for the input data """</span>
+         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">dot_product</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p>You could also try to change the training dataset in order to model an <strong>AND</strong>, <strong>NOR</strong> or <strong>NOT</strong>. Note that it’s impossible to to model <strong>XOR</strong> function using a single perceptron like the one we implemented, because the two labels (<strong>0</strong> or <strong>1</strong>) of an <strong>XOR</strong> function are not lineraly seperable.</p>
+
+<h3 id="wrap-up">Wrap Up</h3>
+
+<p>Here’s the entire code:</p>
+
+<script src="https://gist.github.com/maheshkkumar/db7a81dd17b83c0b0cf08cec2500b04f.js"></script>
+
+
+
+<span class="post-date">
+  Written on
+  
+  January
+  21st
+    ,
+  2017
+  by
+  
+    Mahesh Kumar K
+  
+</span>
+
+<div class="post-date">Feel free to share!</div>
+  <div class="sharing-icons">
+    <a href="https://twitter.com/intent/tweet?text=Implementing a Binary Classifier in Python&amp;url=/article/implementing-a-binary-classifier-in-python.html" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=/article/implementing-a-binary-classifier-in-python.html&amp;title=Implementing a Binary Classifier in Python" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+    <a href="https://plus.google.com/share?url=/article/implementing-a-binary-classifier-in-python.html" target="_blank"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+  </div>
+</div>
+
+
+<div class="related">
+  <h1 >You may also enjoy:</h1>
+  
+  <ul class="related-posts">
+    
+      
+        
+          <li>
+            <h3>
+              <a href="/article/a-guide-to-deploying-machine-learning-models-in-production.html">
+                A guide to deploying Machine/Deep Learning model(s) in Production
+                <!--<img src="http://localhost:4000/images/">-->
+                <!--<small>June 25, 2018</small>-->
+              </a>
+            </h3>
+          </li>
+          
+        
+      
+        
+          <li>
+            <h3>
+              <a href="/article/multiclass-classification.html">
+                Multiclass Classification
+                <!--<img src="http://localhost:4000/images/">-->
+                <!--<small>March 28, 2017</small>-->
+              </a>
+            </h3>
+          </li>
+          
+        
+      
+        
+          <li>
+            <h3>
+              <a href="/article/anatomy-of-natural-language-processing.html">
+                Anatomy of Natural Language Processing
+                <!--<img src="http://localhost:4000/images/">-->
+                <!--<small>March 13, 2017</small>-->
+              </a>
+            </h3>
+          </li>
+          
+        
+      
+    
+  </ul>
+</div>
+
+
+
+  <section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = "www-maheshkumar-xyz";
+    var disqus_identifier = "/article/implementing-a-binary-classifier-in-python.html";
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+    </div>
+
+    <footer class="footer">
+  
+  
+  
+    <a href="https://www.github.com/maheshkkumar" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a>
+  
+
+  
+  
+    <a href="https://twitter.com/maheshkumark_" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+  
+
+  
+  
+    <a href="https://www.linkedin.com/in/maheshkumark" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+  
+
+  
+  
+    <a href="mailto:maheshk2194@gmail.com" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+  
+
+  
+  
+    <a href="/rss-feed.xml"><i class="fa fa-rss-square" aria-hidden="true"></i></a>
+  
+
+  <!-- <div class="post-date"><a href="/menu/about.html">Mahesh Kumar |  by Mahesh Kumar</a></div> -->
+  <div class="post-date">Theme Courtesy -<a href="https://github.com/LeNPaul/Lagrange">Lagrange</a><i class="fas fa-thumbs-up"></i></div>
+</footer>
+
+  </div>
+
+</body>
+</html>
