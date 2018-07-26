@@ -1,14 +1,12 @@
 ---
 layout: post
-title: Image Processing
+title: Introduction to Image Processing in Scikit-Image
 date: 2017-06-08 16:47:14 +0530
 author: "Mahesh Kumar K"
 categories: article
 tags: [image_processing]
 image: combined_golden_gate.jpeg
 ---
-
-# Introduction to Image Processing in Scikit-Image  
 
 **Image Processing** is the process of applying mathematical functions or operations to an image, in order to transform it according to the problem requirements. 
 
