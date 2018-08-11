@@ -6,9 +6,9 @@ layout: page
 
 <!-- Specifically, I am interested in weakly supervised, self-supervised and generative models. -->
 
-### News
+<!-- ### News
 *July 24th, 2018*   
-Revamped my website!
+Revamped my website! -->
 
 <br>
 
