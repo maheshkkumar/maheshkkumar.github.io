@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
     <meta name="description" content="">
@@ -8,11 +9,14 @@
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-143188391-1"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+        window.dataLayer = window.dataLayer || [];
 
-      gtag('config', 'UA-143188391-1');
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-143188391-1');
     </script>
 
     <!-- Bootstrap core CSS -->
@@ -20,28 +24,28 @@
     <link href="./css/styles.css" rel="stylesheet">
 
     <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
-      }
+        
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
     </style>
     <!-- Custom styles for this template -->
     <link href="./css/jumbotron.css" rel="stylesheet">
-  </head>
+</head>
 
-  <link rel='shortcut icon' type='image/x-icon' href='https://www.sfu.ca/favicon.ico' />
-  
-  <body>
+<link rel='shortcut icon' type='image/x-icon' href='https://www.sfu.ca/favicon.ico' />
+
+<body>
     <!-- <nav class="navbar navbar-expand-md fixed-top" id="nav_bar">
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
@@ -60,53 +64,53 @@
 
     <main role="main">
 
-      <br>
-      <div>
-        <div class="container">
-          <div class="row">
-            <div class="col-md-3" id="profile_picture">
-              <img src="./images/Mahesh.jpeg" alt="profile" class="img-fluid rounded">
+        <br>
+        <div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3" id="profile_picture">
+                        <img src="./images/Mahesh.jpeg" alt="profile" class="img-fluid rounded">
+                    </div>
+                    <div class="col-md-8">
+                        <h3>Mahesh Reddy</h3>
+                        I am a graduate student in Computing Science at <a href="https://sfu.ca">Simon Fraser University</a>, where I am advised by Prof. <a href="https://www.cs.sfu.ca/~yagiz/">Yağız Aksoy</a>. My research interests lie in computer vision
+                        <br> </br>
+                        Previously, I was a research intern at <a href="https://www.borealisai.com/">Borealis AI</a> and received my M.Sc. in Computer Science from the <a href="http://umanitoba.ca/">University of Manitoba</a>, where I was advised by Prof.
+                        <a href="https://www.cs.umanitoba.ca/~ywang/">Yang Wang</a>. Before that, I received my B.E. in Information Science from <a href="https://vtu.ac.in/">VTU</a>, India.
+                        <br>
+                        <br> Email: mahesh_reddy [at] sfu.ca
+                        <br>
+                        <a href="./data/CV_Mahesh.pdf">CV</a> / <a href="https://scholar.google.com/citations?user=Fx43OTsAAAAJ&hl=en">Google Scholar</a> / <a href="https://www.github.com/maheshkkumar">GitHub</a> / <a href="https://www.linkedin.com/in/maheshkumark/">LinkedIn</a>
+                    </div>
+                </div>
+                <hr>
             </div>
-            <div class="col-md-8">
-              <h3>Mahesh Reddy</h3>
-              I am a graduate student in Computing Science at <a href="https://sfu.ca">Simon Fraser University</a>, where I am advised by Prof. <a href="https://www.cs.sfu.ca/~yagiz/">Yağız Aksoy</a>. My research interests lie in computer vision and computational photography.
-              <br> </br>
-              Previously, I was a research intern at <a href="https://www.borealisai.com/">Borealis AI</a> and received my M.Sc. in Computer Science from the <a href="http://umanitoba.ca/">University of Manitoba</a>, where I was advised by Prof. <a href="https://www.cs.umanitoba.ca/~ywang/">Yang Wang</a>. Before that, I received my B.E. in Information Science from <a href="https://vtu.ac.in/">VTU</a>, India.
-              <br>
-              <br>
-              Email: mahesh_reddy [at] sfu.ca
-              <br>
-              <a href="./data/CV_Mahesh.pdf">CV</a> / <a href="https://scholar.google.com/citations?user=Fx43OTsAAAAJ&hl=en">Google Scholar</a> / <a href="https://www.github.com/maheshkkumar">GitHub</a> /  <a href="https://www.linkedin.com/in/maheshkumark/">LinkedIn</a>
-            </div>
-          </div>
-          <hr>
         </div>
-      </div>
 
-      <div class="container"></div>
-      <div class="container" id="news">
-        <h3>News</h3>
-        <div class="row">
-          <div class="col-md-8">
-            <ul style="list-style-type:disc;">
-              <li><b style="color: gray;">Aug 2022</b>: 1 paper accepted to <a href="https://s2022.siggraph.org/program/posters/">SIGGRAPH Posters</a> 2022.</li>
-              <li><b style="color: gray;">Feb 2021</b>: 1 paper accepted to <a href="https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=6046">IEEE TMM</a>.</li>
-              <!-- <li><b style="color: gray;">Sep 2020</b>: I joined <a href="https://sfu.ca">SFU</a> as a PhD student.</li> -->
-              <li><b style="color: gray">Jul 2020</b>: 1 paper accepted to <a href="https://bmvc2020.github.io/">BMVC</a> 2020.</li>
-              <li><b style="color: gray;">Jul 2020</b>: 2 papers accepted to <a href="https://eccv2020.eu/">ECCV</a> 2020.</li>
-              <li><b style="color: gray;">May 2020</b>: Summer intern at <a href="https://www.borealisai.com/en/">Borealis AI</a>.</li>
-              <!-- <li><b style="color: gray;">Apr 2020</b>: Successfully defended my <a href="http://hdl.handle.net/1993/34677">MSc thesis</a>.</li>
+        <div class="container"></div>
+        <div class="container" id="news">
+            <h3>News</h3>
+            <div class="row">
+                <div class="col-md-8">
+                    <ul style="list-style-type:disc;">
+                        <li><b style="color: gray;">Aug 2022</b>: 1 paper accepted to <a href="https://s2022.siggraph.org/program/posters/">SIGGRAPH Posters</a> 2022.</li>
+                        <li><b style="color: gray;">Feb 2021</b>: 1 paper accepted to <a href="https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=6046">IEEE TMM</a>.</li>
+                        <!-- <li><b style="color: gray;">Sep 2020</b>: I joined <a href="https://sfu.ca">SFU</a> as a PhD student.</li> -->
+                        <li><b style="color: gray">Jul 2020</b>: 1 paper accepted to <a href="https://bmvc2020.github.io/">BMVC</a> 2020.</li>
+                        <li><b style="color: gray;">Jul 2020</b>: 2 papers accepted to <a href="https://eccv2020.eu/">ECCV</a> 2020.</li>
+                        <li><b style="color: gray;">May 2020</b>: Summer intern at <a href="https://www.borealisai.com/en/">Borealis AI</a>.</li>
+                        <!-- <li><b style="color: gray;">Apr 2020</b>: Successfully defended my <a href="http://hdl.handle.net/1993/34677">MSc thesis</a>.</li>
               <li><b style="color: gray;">Dec 2019</b>: 1 paper accepted to <a href="https://wacv20.wacv.net/">WACV</a> 2020.</li>
               <li><b style="color: gray;">Oct 2019</b>: Student Volunteer <a href="https://nips.cc/Conferences/2019">NeurIPS</a> 2019.</li>
               <li><b style="color: gray;">Jul 2019</b>: 1 paper accepted to <a href="https://bmvc2019.org/">BMVC</a> 2019.</li>
               <li><b style="color: gray;">Jul 2019</b>: 1 paper accepted to <a href="http://avss2019.org/">AVSS</a> 2019.</li> -->
-            </ul>
-          </div>
+                    </ul>
+                </div>
+            </div>
+            <hr>
         </div>
-        <hr>
-      </div>
 
-     <!--
+        <!--
       <div class="container" id="publications">
         <h3>Preprints</h3>
         <div class="row" id="publication">
@@ -124,144 +128,145 @@
       </div>
      -->
 
-      <br>
+        <br>
 
-      <div class="container" id="publications">
-        <h3>Publications</h3>
-        <div class="row" id="publication">
-          <div class="col-md-3">
-            <img src="./images/in_de.png" alt="profile" class="img-fluid rounded" id="pub-img">
-          </div>
-          <div class="col-md-9">
-            <h5 id="pub_title">Interactive Editing of Monocular Depth</h5>
-            <p>Obumneme Stanley Dukor, S. Mahdi H. Miangoleh, <b>Mahesh Kumar Krishna Reddy</b>, Long Mai, and Yağız Aksoy</p>
-            <p><i>SIGGRAPH Posters, 2022</i></p>
-            <a href="https://depth-app.netlify.app/editor">interactive editor</a> // <a href="https://yaksoy.github.io/interactiveDepth/">webpage</a> // <a href="http://yaksoy.github.io/papers/SIG22a-interactiveDepth.pdf">paper</a>
-          </div>
-        </div>
-        <hr>
-        <div class="row" id="publication">
-            <div class="col-md-3">
-              <img src="./images/ada-cc-arxiv.png" alt="profile" class="img-fluid rounded" id="pub-img">
+        <div class="container" id="publications">
+            <h3>Publications</h3>
+            <div class="row" id="publication">
+                <div class="col-md-3">
+                    <img src="./images/in_de.png" alt="profile" class="img-fluid rounded" id="pub-img">
+                </div>
+                <div class="col-md-9">
+                    <h5 id="pub_title">Interactive Editing of Monocular Depth</h5>
+                    <p>Obumneme Stanley Dukor, S. Mahdi H. Miangoleh, <b>Mahesh Kumar Krishna Reddy</b>, Long Mai, and Yağız Aksoy</p>
+                    <p><i>SIGGRAPH Posters, 2022</i></p>
+                    <a href="https://depth-app.netlify.app/editor">interactive editor</a> // <a href="https://yaksoy.github.io/interactiveDepth/">webpage</a> // <a href="http://yaksoy.github.io/papers/SIG22a-interactiveDepth.pdf">paper</a>
+                </div>
             </div>
-            <div class="col-md-9">
-              <h5 id="pub_title">AdaCrowd: Unlabeled Scene Adaptation for Crowd Counting</h5>
-              <p><b>Mahesh Kumar Krishna Reddy</b>, Mrigank Rochan, Yiwei Lu and Yang Wang</p>
-              <p><i>IEEE Transactions on Multimedia (TMM), 2021</i></p>
-              <a href="https://arxiv.org/abs/2010.12141">paper</a> // <a href="https://github.com/maheshkkumar/adacrowd">code</a>
+            <hr>
+            <div class="row" id="publication">
+                <div class="col-md-3">
+                    <img src="./images/ada-cc-arxiv.png" alt="profile" class="img-fluid rounded" id="pub-img">
+                </div>
+                <div class="col-md-9">
+                    <h5 id="pub_title">AdaCrowd: Unlabeled Scene Adaptation for Crowd Counting</h5>
+                    <p><b>Mahesh Kumar Krishna Reddy</b>, Mrigank Rochan, Yiwei Lu and Yang Wang</p>
+                    <p><i>IEEE Transactions on Multimedia (TMM), 2021</i></p>
+                    <a href="https://arxiv.org/abs/2010.12141">paper</a> // <a href="https://github.com/maheshkkumar/adacrowd">code</a>
+                </div>
             </div>
-          </div>
-          <hr>
-        <div class="row" id="publication">
-          <div class="col-md-3">
-            <img src="./images/tg-eccv.png" alt="profile" class="img-fluid rounded" id="pub-img">
-          </div>
-          <div class="col-md-9">
-            <h5 id="pub_title">Sentence Guided Temporal Modulation for Dynamic Video Thumbnail Generation </h5>
-            <p>Mrigank Rochan, <b>Mahesh Kumar Krishna Reddy</b> and Yang Wang</p>
-            <p><i>British Machine Vision Conference (BMVC), 2020</i></p>
-            <a href="https://arxiv.org/abs/2008.13362">paper</a> 
-          </div>
+            <hr>
+            <div class="row" id="publication">
+                <div class="col-md-3">
+                    <img src="./images/tg-eccv.png" alt="profile" class="img-fluid rounded" id="pub-img">
+                </div>
+                <div class="col-md-9">
+                    <h5 id="pub_title">Sentence Guided Temporal Modulation for Dynamic Video Thumbnail Generation </h5>
+                    <p>Mrigank Rochan, <b>Mahesh Kumar Krishna Reddy</b> and Yang Wang</p>
+                    <p><i>British Machine Vision Conference (BMVC), 2020</i></p>
+                    <a href="https://arxiv.org/abs/2008.13362">paper</a>
+                </div>
+            </div>
+            <hr>
+            <div class="row" id="publication">
+                <div class="col-md-3">
+                    <img src="./images/hd-eccv.png" alt="profile" class="img-fluid rounded" id="pub-img">
+                </div>
+                <div class="col-md-9">
+                    <h5 id="pub_title">Adaptive Video Highlight Detection by Learning from User History</h5>
+                    <p>Mrigank Rochan, <b>Mahesh Kumar Krishna Reddy</b>, Linwei Ye and Yang Wang</p>
+                    <p><i>European Conference on Computer Vision (ECCV), 2020</i></p>
+                    <a href="https://arxiv.org/abs/2007.09598">paper</a> // <a href="https://github.com/mrochan/adaptive-highlight">code</a>
+                </div>
+            </div>
+            <hr>
+            <div class="row" id="publication">
+                <div class="col-md-3">
+                    <img src="./images/anomaly-eccv.png" alt="profile" class="img-fluid rounded" id="pub-img">
+                </div>
+                <div class="col-md-9">
+                    <h5 id="pub_title">Few-Shot Scene-Adaptive Anomaly Detection</h5>
+                    <p>Yiwei Lu, Frank Yu, <b>Mahesh Kumar Krishna Reddy</b> and Yang Wang</p>
+                    <p><i>European Conference on Computer Vision (ECCV), 2020</i> <b style="color: red;">(Spotlight)</b></p>
+                    <a href="https://arxiv.org/abs/2007.07843">paper</a> // <a href="https://github.com/yiweilu3/Few-shot-Scene-adaptive-Anomaly-Detection">code</a>
+                </div>
+            </div>
+            <hr>
+            <div class="row" id="publication">
+                <div class="col-md-3">
+                    <img src="./images/ml-cc.png" alt="profile" class="img-fluid rounded" id="pub-img">
+                </div>
+                <div class="col-md-9">
+                    <h5 id="pub_title">Few-Shot Scene Adaptive Crowd Counting Using Meta-Learning</h5>
+                    <p><b>Mahesh Kumar Krishna Reddy</b>, Mohammad Hossain, Mrigank Rochan and Yang Wang</p>
+                    <p><i>IEEE Winter Conference of Applications on Computer Vision (WACV), 2020</i></p>
+                    <a href="https://arxiv.org/abs/2002.00264">paper</a> // <a href="https://github.com/maheshkkumar/fscc">code</a> // <a href="./posters/few_shot_wacv.pdf">poster</a>
+                </div>
+            </div>
+            <hr>
+            <div class="row" id="publication">
+                <div class="col-md-3">
+                    <img src="./images/cc-da.png" alt="profile" class="img-fluid rounded" id="pub-img">
+                </div>
+                <div class="col-md-9">
+                    <h5 id="pub_title">Domain Adaptation in Crowd Counting</h5>
+                    <p>Mohammad Hossain, <b>Mahesh Kumar Krishna Reddy</b>, Kevin Cannons, Zhan Xu and Yang Wang</p>
+                    <p><i>Conference on Robot and Computer Vision (CRV), 2020</i></p>
+                    <a href="https://www.computerrobotvision.org/proceedings/pdfs/CRV2020-1ugoWdlO2rSdvYvbAocrmh/989100a150/989100a150.pdf">paper</a>
+                </div>
+            </div>
+            <hr>
+            <div class="row" id="publication">
+                <div class="col-md-3">
+                    <img src="./images/os-ss-cc.png" alt="profile" class="img-fluid rounded" id="pub-img">
+                </div>
+                <div class="col-md-9">
+                    <h5 id="pub_title">One-Shot Scene-Specific Crowd Counting</h5>
+                    <p>Mohammad Hossain, <b>Mahesh Kumar Krishna Reddy</b>, Mehrdad Hosseinzadeh, Omit Chanda and Yang Wang</p>
+                    <p><i>British Machine Vision Conference (BMVC), 2019</i></p>
+                    <a href="https://bmvc2019.org/wp-content/uploads/papers/0209-paper.pdf">paper</a>
+                </div>
+            </div>
+            <hr>
+            <div class="row" id="publication">
+                <div class="col-md-3">
+                    <img src="./images/ffp-ad.png" alt="profile" class="img-fluid rounded" id="pub-img">
+                </div>
+                <div class="col-md-9">
+                    <h5 id="pub_title">Future Frame Prediction Using Convolutional VRNN for Anomaly Detection</h5>
+                    <p>Yiwei Lu, <b>Mahesh Kumar Krishna Reddy</b>, Seyed shahabeddin Nabavi and Yang Wang</p>
+                    <p><i>IEEE International Conference on Advanced Video and Signal-based Surveillance (AVSS), 2019</i></p>
+                    <a href="http://cs.umanitoba.ca/~ywang/papers/avss19_anomaly.pdf">paper</a> // <a href="https://github.com/yiweilu3/CONV-VRNN-for-Anomaly-Detection">code</a>
+                </div>
+            </div>
+            <hr>
         </div>
-        <hr>
-        <div class="row" id="publication">
-          <div class="col-md-3">
-            <img src="./images/hd-eccv.png" alt="profile" class="img-fluid rounded" id="pub-img">
-          </div>
-          <div class="col-md-9">
-            <h5 id="pub_title">Adaptive Video Highlight Detection by Learning from User History</h5>
-            <p>Mrigank Rochan, <b>Mahesh Kumar Krishna Reddy</b>, Linwei Ye and Yang Wang</p>
-            <p><i>European Conference on Computer Vision (ECCV), 2020</i></p>
-            <a href="https://arxiv.org/abs/2007.09598">paper</a> // <a href="https://github.com/mrochan/adaptive-highlight">code</a>
-          </div>
-        </div>
-        <hr>
-        <div class="row" id="publication">
-          <div class="col-md-3">
-            <img src="./images/anomaly-eccv.png" alt="profile" class="img-fluid rounded" id="pub-img">
-          </div>
-          <div class="col-md-9">
-            <h5 id="pub_title">Few-Shot Scene-Adaptive Anomaly Detection</h5>
-            <p>Yiwei Lu, Frank Yu, <b>Mahesh Kumar Krishna Reddy</b> and Yang Wang</p>
-            <p><i>European Conference on Computer Vision (ECCV), 2020</i> <b style="color: red;">(Spotlight)</b></p> 
-            <a href="https://arxiv.org/abs/2007.07843">paper</a> // <a href="https://github.com/yiweilu3/Few-shot-Scene-adaptive-Anomaly-Detection">code</a>
-          </div>
-        </div>
-        <hr>
-        <div class="row" id="publication">
-          <div class="col-md-3">
-            <img src="./images/ml-cc.png" alt="profile" class="img-fluid rounded" id="pub-img">
-          </div>
-          <div class="col-md-9">
-            <h5 id="pub_title">Few-Shot Scene Adaptive Crowd Counting Using Meta-Learning</h5>
-            <p><b>Mahesh Kumar Krishna Reddy</b>, Mohammad Hossain, Mrigank Rochan and Yang Wang</p>
-            <p><i>IEEE Winter Conference of Applications on Computer Vision (WACV), 2020</i></p>
-            <a href="https://arxiv.org/abs/2002.00264">paper</a> // <a href="https://github.com/maheshkkumar/fscc">code</a> // <a href="./posters/few_shot_wacv.pdf">poster</a>
-          </div>
-        </div>
-        <hr>
-        <div class="row" id="publication">
-          <div class="col-md-3">
-            <img src="./images/cc-da.png" alt="profile" class="img-fluid rounded" id="pub-img">
-          </div>
-          <div class="col-md-9">
-            <h5 id="pub_title">Domain Adaptation in Crowd Counting</h5>
-            <p>Mohammad Hossain, <b>Mahesh Kumar Krishna Reddy</b>, Kevin Cannons, Zhan Xu and Yang Wang</p>
-            <p><i>Conference on Robot and Computer Vision (CRV), 2020</i></p>
-            <a href="https://www.computerrobotvision.org/proceedings/pdfs/CRV2020-1ugoWdlO2rSdvYvbAocrmh/989100a150/989100a150.pdf">paper</a>
-          </div>
-        </div>
-        <hr>
-        <div class="row" id="publication">
-          <div class="col-md-3">
-            <img src="./images/os-ss-cc.png" alt="profile" class="img-fluid rounded" id="pub-img">
-          </div>
-          <div class="col-md-9">
-            <h5 id="pub_title">One-Shot Scene-Specific Crowd Counting</h5>
-            <p>Mohammad Hossain, <b>Mahesh Kumar Krishna Reddy</b>, Mehrdad Hosseinzadeh, Omit Chanda and Yang Wang</p>
-            <p><i>British Machine Vision Conference (BMVC), 2019</i></p>
-            <a href="https://bmvc2019.org/wp-content/uploads/papers/0209-paper.pdf">paper</a>
-          </div>
-        </div>
-        <hr>
-        <div class="row" id="publication">
-          <div class="col-md-3">
-            <img src="./images/ffp-ad.png" alt="profile" class="img-fluid rounded" id="pub-img">
-          </div>
-          <div class="col-md-9">
-            <h5 id="pub_title">Future Frame Prediction Using Convolutional VRNN for Anomaly Detection</h5>
-            <p>Yiwei Lu, <b>Mahesh Kumar Krishna Reddy</b>, Seyed shahabeddin Nabavi and Yang Wang</p>
-            <p><i>IEEE International Conference on Advanced Video and Signal-based Surveillance (AVSS), 2019</i></p>
-            <a href="http://cs.umanitoba.ca/~ywang/papers/avss19_anomaly.pdf">paper</a> // <a href="https://github.com/yiweilu3/CONV-VRNN-for-Anomaly-Detection">code</a>
-          </div>
-        </div>
-        <hr>
-      </div>
 
-      <br>
-      <div class="container" id="publications">
-        <h3>Theses</h3>
-        <div class="row" id="publication">
-          <div class="col-md-3">
-            <img src="./images/um_thesis.png" alt="profile" class="img-fluid rounded" id="pub-img">
-          </div>
-          <div class="col-md-9">
-            <h5 id="pub_title"><a href="https://mspace.lib.umanitoba.ca/xmlui/handle/1993/34677">Scene Adaptive Crowd Counting</a></h5>
-            <p><b>Mahesh Kumar Krishna Reddy</b></p>
-            <p><i>MSc Thesis, University of Manitoba, 2020</i></p>
-          </div>
-        </div>
+        <br>
+        <div class="container" id="publications">
+            <h3>Theses</h3>
+            <div class="row" id="publication">
+                <div class="col-md-3">
+                    <img src="./images/um_thesis.png" alt="profile" class="img-fluid rounded" id="pub-img">
+                </div>
+                <div class="col-md-9">
+                    <h5 id="pub_title"><a href="./theses/UofM20_MSc_Mahesh.pdf">Scene Adaptive Crowd Counting</a></h5>
+                    <p><b>Mahesh Kumar Krishna Reddy</b></p>
+                    <p><i>MSc Thesis, University of Manitoba, 2020</i></p>
+                </div>
+            </div>
 
     </main>
 
     <footer class="container">
-      <p style="float: right;">Last modified on <span id="last_modified"></span></p>
-      <script>
-        document.getElementById("last_modified").innerHTML = document.lastModified;
-      </script>
+        <p style="float: right;">Last modified on <span id="last_modified"></span></p>
+        <script>
+            document.getElementById("last_modified").innerHTML = document.lastModified;
+        </script>
     </footer>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  </body>
+</body>
+
 </html>
