@@ -1,0 +1,27 @@
+/* #profile_picture img{
+    padding: 15%;
+} */
+
+#pub-img{
+    width: 175px;
+    height: 105px;
+}
+
+#pub_title{
+    color: #1b263b;
+    font-size: 13pt;
+}
+
+#publication{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    line-height: 10pt;
+}
+
+#nav_bar{
+    background-color: #1b263b;
+}
+
+#nav_bar a{
+    color: white;
+}
