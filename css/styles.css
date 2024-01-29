@@ -6,13 +6,38 @@
     font-family: 'Open Sans', sans-serif;
 }
 
-#pub-img {
-    width: 175px;
-    height: 105px;
+#pub-img-qcom {
+    width: 190px;
+    height: 120px;
+    border-style: inset;
+    border: 2px solid #3253DC;
+}
+
+#pub-img-sfu {
+    width: 190px;
+    height: 120px;
+    border: 2px solid #CC0633;
+}
+
+#pub-img-uofm {
+    width: 190px;
+    height: 120px;
+    border: 2px solid #4F2C1D;
+}
+
+#pub_title_qcom {
+    font-size: 14pt;
+    color: #3253DC;
+}
+
+#pub_title_sfu {
+    font-size: 14pt;
+    color: #CC0633;
 }
 
 #pub_title {
     font-size: 14pt;
+    color: #4F2C1D;
 }
 
 #publication {
