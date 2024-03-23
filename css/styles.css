@@ -12,22 +12,22 @@
     width: 190px;
     height: 120px;
     border-style: inset;
-    /* border: 1.5px solid #3253DC; */
-    box-shadow: 2px 2px 4px #3253DC;
+    border: 1.5px solid #3253DC;
+    box-shadow: 1.5px 1.5px 2px #3253DC;
 }
 
 #pub-img-sfu {
     width: 190px;
     height: 120px;
-    /* border: 1.5px solid #CC0633; */
-    box-shadow: 2px 2px 4px #CC0633;
+    border: 1.5px solid #CC0633;
+    box-shadow: 1.5px 1.5px 2px #CC0633;
 }
 
 #pub-img-uofm {
     width: 190px;
     height: 120px;
     border: 1.5px solid #4F2C1D;
-    box-shadow: 2px 2px 4px #4F2C1D;
+    box-shadow: 1.5px 1.5px 2px #4F2C1D;
 }
 
 #pub_title_qcom {
