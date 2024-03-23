@@ -3,26 +3,31 @@
 } */
 
 * {
-    font-family: 'Open Sans', sans-serif;
+    /* font-family: 'Open Sans', sans-serif; */
+    /* font-family: Arial, sans-serif; */
+    font-family: 'Trebuchet MS', sans-serif;
 }
 
 #pub-img-qcom {
     width: 190px;
     height: 120px;
     border-style: inset;
-    border: 2px solid #3253DC;
+    /* border: 1.5px solid #3253DC; */
+    box-shadow: 2px 2px 4px #3253DC;
 }
 
 #pub-img-sfu {
     width: 190px;
     height: 120px;
-    border: 2px solid #CC0633;
+    /* border: 1.5px solid #CC0633; */
+    box-shadow: 2px 2px 4px #CC0633;
 }
 
 #pub-img-uofm {
     width: 190px;
     height: 120px;
-    border: 2px solid #4F2C1D;
+    border: 1.5px solid #4F2C1D;
+    box-shadow: 2px 2px 4px #4F2C1D;
 }
 
 #pub_title_qcom {
@@ -43,7 +48,7 @@
 #publication {
     margin-top: 20px;
     margin-bottom: 20px;
-    line-height: 10pt;
+    /* line-height: 10pt; */
 }
 
 #nav_bar {
@@ -75,6 +80,7 @@ body {
     height: 100vh;
     margin: 0;
     transition: background 0.2s linear;
+    background-color: #EBF5FB;
 }
 
 body.dark {
@@ -134,4 +140,27 @@ a.dark {
     position: absolute;
     top: 2%;
     right: 5%;
+}
+
+#mid-block{
+   background-color: #D5D8DC; 
+   padding: 3%;
+   border-radius: 3px;
+   box-shadow: 5px 5px 10px gray;
+}
+
+.col-md-9{
+    padding: 8px;
+    justify-content: center;
+}
+
+.col-md-3{
+    padding: 8px;
+    display: flex;
+    justify-content: center;
+}
+
+.col-md-3 img{
+    margin: auto;
+    display: block;
 }
