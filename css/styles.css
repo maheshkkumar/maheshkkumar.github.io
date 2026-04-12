@@ -1,166 +1,529 @@
-/* #profile_picture img{
-    padding: 15%;
-} */
+/* ============================================
+   MAHESH REDDY — PERSONAL SITE
+   Warm editorial design with strong typography
+   ============================================ */
 
-* {
-    /* font-family: 'Open Sans', sans-serif; */
-    /* font-family: Arial, sans-serif; */
-    font-family: 'Trebuchet MS', sans-serif;
+/* --- Tokens --- */
+:root {
+  --bg: #FAF8F5;
+  --bg-alt: #F2EFE9;
+  --text: #2c2825;
+  --text-secondary: #5c554e;
+  --text-muted: #8c847a;
+  --accent: #b44a2d;
+  --accent-hover: #943c24;
+  --rule: #d6d0c6;
+  --link: #2c2825;
+  --link-hover: var(--accent);
+
+  --font-serif: 'Instrument Serif', 'Georgia', serif;
+  --font-sans: 'DM Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-mono: 'DM Mono', 'Courier New', monospace;
+
+  --max-w: 880px;
+  --gutter: 1.5rem;
 }
 
-#pub-img-qcom {
-    width: 190px;
-    height: 120px;
-    border-style: inset;
-    border: 1.5px solid #3253DC;
-    box-shadow: 1.5px 1.5px 2px #3253DC;
+/* --- Dark Theme --- */
+[data-theme="dark"] {
+  --bg: #1c1b1a;
+  --bg-alt: #252422;
+  --text: #e0ddd8;
+  --text-secondary: #a8a49c;
+  --text-muted: #706c64;
+  --accent: #d4734f;
+  --accent-hover: #e8845e;
+  --rule: #353330;
+  --link: #e0ddd8;
+  --link-hover: var(--accent);
 }
 
-#pub-img-sfu {
-    width: 190px;
-    height: 120px;
-    border: 1.5px solid #CC0633;
-    box-shadow: 1.5px 1.5px 2px #CC0633;
+/* --- Reset --- */
+*, *::before, *::after {
+  margin: 0; padding: 0; box-sizing: border-box;
 }
 
-#pub-img-uofm {
-    width: 190px;
-    height: 120px;
-    border: 1.5px solid #4F2C1D;
-    box-shadow: 1.5px 1.5px 2px #4F2C1D;
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
 }
 
-#pub_title_qcom {
-    font-size: 14pt;
-    color: #3253DC;
+::selection {
+  background: var(--accent);
+  color: #fff;
 }
 
-#pub_title_sfu {
-    font-size: 14pt;
-    color: #CC0633;
-}
-
-#pub_title {
-    font-size: 14pt;
-    color: #4F2C1D;
-}
-
-#publication {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    /* line-height: 10pt; */
-}
-
-#nav_bar {
-    background-color: #1b263b;
-}
-
-#nav_bar a {
-    color: white;
-}
-
-.bd-placeholder-img {
-    font-size: 1.125rem;
-    text-anchor: middle;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
-@media (min-width: 768px) {
-    .bd-placeholder-img-lg {
-        font-size: 3.5rem;
-    }
-}
-
+/* --- Base --- */
 body {
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    transition: background 0.2s linear;
-    background-color: #EBF5FB;
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.65;
+  min-height: 100vh;
 }
 
-body.dark {
-    background-color: #222;
-    color: #e6e6e6;
+a {
+  color: var(--link);
+  text-decoration-color: var(--rule);
+  text-underline-offset: 3px;
+  transition: color 0.15s ease, text-decoration-color 0.15s ease;
+}
+a:hover {
+  color: var(--link-hover);
+  text-decoration-color: var(--accent);
 }
 
-a.dark {
-    color: #e6e6e6;
+img { display: block; max-width: 100%; }
+
+/* --- Layout --- */
+.noise {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
-.checkbox {
-    opacity: 0;
-    position: absolute;
+[data-theme="dark"] .noise {
+  opacity: 0.03;
 }
 
-.label {
-    width: 40px;
-    height: 20px;
-    background-color: #111;
+.site {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 6rem var(--gutter) 4rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* --- Header / Profile --- */
+.profile {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 2.5rem;
+  align-items: start;
+  margin-bottom: 4rem;
+}
+
+.profile-photo img {
+  width: 140px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 4px;
+  filter: grayscale(15%);
+  transition: filter 0.4s ease, opacity 0.3s ease;
+}
+
+[data-theme="dark"] .profile-photo img {
+  filter: grayscale(10%) brightness(0.92);
+}
+
+.profile-photo img:hover {
+  filter: grayscale(0%);
+}
+
+.profile-text h1 {
+  font-family: var(--font-serif);
+  font-size: 2.6rem;
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.6rem;
+  color: var(--text);
+}
+
+.profile-role {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: 1.2rem;
+}
+
+.profile-bio {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  max-width: 520px;
+}
+
+.profile-bio .lead {
+  font-size: 1.05rem;
+  color: var(--text);
+  display: block;
+  margin-bottom: 0.8rem;
+  line-height: 1.5;
+}
+
+.profile-bio a {
+  font-weight: 500;
+}
+
+/* Social row */
+.profile-links {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 1.4rem;
+}
+
+.profile-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--rule);
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+.profile-links a:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* --- Section Dividers --- */
+.section {
+  margin-bottom: 3.5rem;
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.4rem;
+  color: var(--text);
+}
+
+.section-rule {
+  width: 40px;
+  height: 2px;
+  background: var(--accent);
+  border: none;
+  margin-bottom: 2rem;
+}
+
+/* --- Publication Items --- */
+.pub-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.pub-item {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 1.5rem;
+  padding: 1.4rem 0;
+  border-bottom: 1px solid var(--rule);
+  align-items: start;
+}
+
+.pub-item:first-child {
+  border-top: 1px solid var(--rule);
+}
+
+.pub-thumb {
+  width: 130px;
+  height: 82px;
+  overflow: hidden;
+  border-radius: 3px;
+  background: var(--bg-alt);
+}
+
+.pub-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.pub-item:hover .pub-thumb img {
+  transform: scale(1.04);
+}
+
+.pub-title {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.92rem;
+  line-height: 1.4;
+  margin-bottom: 0.25rem;
+  color: var(--text);
+}
+
+.pub-authors {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 0.15rem;
+}
+
+.pub-authors strong {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.pub-venue {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-bottom: 0.5rem;
+}
+
+.pub-venue .spotlight {
+  color: var(--accent);
+  font-weight: 600;
+  font-style: normal;
+}
+
+.pub-meta {
+  display: flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.pub-meta a {
+  font-size: 0.72rem;
+  font-weight: 500;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+  padding: 2px 8px;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  text-decoration: none;
+  color: var(--text-muted);
+  transition: all 0.15s ease;
+}
+.pub-meta a:hover {
+  border-color: var(--accent);
+  background-color: var(--accent);
+  color: #fff;
+}
+
+/* --- Theses --- */
+.thesis-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+
+.thesis-card {
+  padding: 1.4rem;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  transition: border-color 0.2s ease;
+}
+
+.thesis-card:hover {
+  border-color: var(--accent);
+}
+
+.thesis-school {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.1rem;
+}
+
+.thesis-year {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-bottom: 0.6rem;
+}
+
+.thesis-card .pub-title {
+  margin-bottom: 0.6rem;
+}
+
+@media (max-width: 640px) {
+  .thesis-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- Footer --- */
+.site-footer {
+  margin-top: 4rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  letter-spacing: 0.03em;
+}
+
+/* --- Scroll reveal --- */
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* --- Responsive --- */
+@media (max-width: 640px) {
+  .site {
+    padding-top: 3rem;
+  }
+
+  .profile {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .profile-photo {
     display: flex;
-    border-radius: 50px;
-    align-items: center;
-    justify-content: space-between;
-    padding: 5px;
-    position: relative;
-    transform: scale(1.5);
-}
-
-.ball {
-    width: 16px;
-    height: 16px;
-    background-color: rgb(67, 169, 247);
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    border-radius: 50%;
-    transition: transform 0.3s linear;
-}
-
-
-/*  target the elemenent after the label*/
-
-.checkbox:checked+.label .ball {
-    transform: translateX(18px);
-}
-
-.bi-moon {
-    color: rgb(255, 255, 255);
-}
-
-.bi-sun {
-    color: rgb(255, 255, 255);
-}
-
-#dark_theme {
-    position: absolute;
-    top: 2%;
-    right: 5%;
-}
-
-#mid-block{
-   background-color: #D5D8DC; 
-   padding: 3%;
-   border-radius: 3px;
-   box-shadow: 5px 5px 10px gray;
-}
-
-.col-md-9{
-    padding: 8px;
     justify-content: center;
-}
+  }
 
-.col-md-3{
-    padding: 8px;
-    display: flex;
+  .profile-photo img {
+    width: 110px;
+    height: 130px;
+  }
+
+  .profile-text h1 {
+    font-size: 2rem;
+  }
+
+  .profile-bio {
+    max-width: none;
+  }
+
+  .profile-links {
     justify-content: center;
+  }
+
+  .pub-item {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+
+  .pub-thumb {
+    width: 100%;
+    height: 160px;
+  }
 }
 
-.col-md-3 img{
-    margin: auto;
-    display: block;
+/* --- YouTube Facade --- */
+.yt-facade {
+  position: relative;
+  cursor: pointer;
+  border-radius: 3px;
+  overflow: hidden;
+  width: 130px;
+  height: 82px;
 }
+
+.yt-facade img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: filter 0.2s ease;
+}
+
+.yt-facade:hover img {
+  filter: brightness(0.8);
+}
+
+.yt-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 1.4rem;
+  background: rgba(0, 0, 0, 0.6);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.yt-facade:hover .yt-play {
+  background: rgba(180, 74, 45, 0.9);
+}
+
+/* --- Theme Toggle --- */
+.theme-toggle {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 100;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid var(--rule);
+  background: var(--bg);
+  color: var(--text-muted);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  padding: 0;
+  line-height: 1;
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.theme-toggle .icon-sun,
+.theme-toggle .icon-moon {
+  transition: opacity 0.2s ease, transform 0.3s ease;
+  position: absolute;
+}
+
+.theme-toggle .icon-sun {
+  opacity: 0;
+  transform: rotate(-45deg) scale(0.8);
+}
+
+.theme-toggle .icon-moon {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+[data-theme="dark"] .theme-toggle .icon-sun {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+[data-theme="dark"] .theme-toggle .icon-moon {
+  opacity: 0;
+  transform: rotate(45deg) scale(0.8);
+}
+
+/* --- Transition for theme switch --- */
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.pub-item,
+.thesis-card,
+.site-footer,
+.profile-links a {
+  transition: border-color 0.3s ease, color 0.3s ease, background-color 0.3s ease;
+}
+
+/* --- Scrollbar (subtle) --- */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 3px; }
