@@ -40,7 +40,7 @@
     <div class="noise"></div>
 
     <!-- Theme toggle -->
-    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" aria-pressed="true">
         <i class="bi bi-sun-fill icon-sun"></i>
         <i class="bi bi-moon-fill icon-moon"></i>
     </button>
@@ -56,14 +56,14 @@
                 <h1>Mahesh Reddy</h1>
                 <p class="profile-role">Researcher · Qualcomm AI Research</p>
                 <p class="profile-bio">
-                    <span class="lead">I work on 3D computer vision and generative AI at <a href="https://www.qualcomm.com/research/artificial-intelligence/ai-research">Qualcomm AI Research</a>.</span>
+                    <span class="lead">I work on 3D computer vision and generative AI at <a href="https://www.qualcomm.com/research/artificial-intelligence/ai-research" rel="noopener noreferrer">Qualcomm AI Research</a>.</span>
                     I completed my MSc in Computing Science from
-                    <a href="https://sfu.ca">Simon Fraser University</a>,
-                    advised by Prof.&nbsp;<a href="http://yaksoy.github.io/">Yağız Aksoy</a>.
+                    <a href="https://sfu.ca" rel="noopener noreferrer">Simon Fraser University</a>,
+                    advised by Prof.&nbsp;<a href="http://yaksoy.github.io/" rel="noopener noreferrer">Yağız Aksoy</a>.
                     Previously, I was a research intern at
-                    <a href="https://www.borealisai.com/">Borealis AI</a>
+                    <a href="https://www.borealisai.com/" rel="noopener noreferrer">Borealis AI</a>
                     and received my MSc in Computer Science from the
-                    <a href="http://umanitoba.ca/">University of Manitoba</a>,
+                    <a href="http://umanitoba.ca/" rel="noopener noreferrer">University of Manitoba</a>,
                     advised by Prof.&nbsp;<a href="https://www.cs.umanitoba.ca/~ywang/">Yang Wang</a>.
                     Before that, I received my BE in Information Science from
                     <a href="https://vtu.ac.in/">VTU</a>, India.
@@ -331,6 +331,7 @@
                 const isDark = root.getAttribute('data-theme') === 'dark';
                 const next = isDark ? 'light' : 'dark';
                 root.setAttribute('data-theme', next);
+                toggle.setAttribute('aria-pressed', next === 'dark');
                 localStorage.setItem('theme', next);
                 if (metaTheme) metaTheme.setAttribute('content', next === 'dark' ? '#1c1b1a' : '#FAF8F5');
             });
