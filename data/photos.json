@@ -1,0 +1,22 @@
+{
+  "locations": [
+    {
+      "id": "coorg",
+      "name": "Coorg",
+      "region": "Karnataka",
+      "country": "India",
+      "lat": 12.3375,
+      "lng": 75.8069,
+      "photos": [
+        { "file": "photo-1.jpg", "title": "Coorg Landscape" },
+        { "file": "photo-2.jpg", "title": "Coffee Plantation" },
+        { "file": "photo-3.jpg", "title": "Monsoon Greens" },
+        { "file": "photo-4.jpg", "title": "Morning Mist" },
+        { "file": "photo-5.jpg", "title": "Valley View" },
+        { "file": "photo-6.jpg", "title": "Forest Trail" },
+        { "file": "photo-7.jpg", "title": "Quiet Stream" },
+        { "file": "photo-8.jpg", "title": "Sunset Hills" }
+      ]
+    }
+  ]
+}

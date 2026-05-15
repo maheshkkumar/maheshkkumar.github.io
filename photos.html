@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Photography by Mahesh Reddy">
+    <title>Photography · Mahesh Reddy</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
+    <meta name="theme-color" content="#1c1b1a">
+</head>
+
+<body>
+    <a href="./index.html" class="skip-link">Back to home</a>
+
+    <div class="noise"></div>
+
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" aria-pressed="true">
+        <i class="bi bi-sun-fill icon-sun"></i>
+        <i class="bi bi-moon-fill icon-moon"></i>
+    </button>
+
+    <div class="site">
+
+        <header class="page-header reveal">
+            <h1>Photography</h1>
+            <p class="page-subtitle">A collection of moments captured around the world.</p>
+            <nav class="page-nav">
+                <a href="./index.html"><i class="bi bi-arrow-left"></i> Back</a>
+            </nav>
+        </header>
+
+        <div class="location-tabs reveal" id="location-tabs"></div>
+
+        <div class="map-section reveal">
+            <div id="photo-map"></div>
+            <p class="map-caption" id="map-caption"></p>
+        </div>
+
+        <div class="masonry-grid" id="photo-grid"></div>
+
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+        <button class="lightbox-close" aria-label="Close">&times;</button>
+        <button class="lightbox-nav lightbox-prev" aria-label="Previous"><i class="bi bi-chevron-left"></i></button>
+        <div class="lightbox-content">
+            <img src="" alt="">
+        </div>
+        <button class="lightbox-nav lightbox-next" aria-label="Next"><i class="bi bi-chevron-right"></i></button>
+        <div class="lightbox-caption"></div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+    (async function() {
+        let locations = [];
+        
+        try {
+            const res = await fetch('./data/photos.json');
+            const data = await res.json();
+            locations = data.locations || [];
+        } catch (e) {
+            console.warn('photos.json not found', e);
+        }
+
+        let currentLocation = locations[0] || null;
+        
+        // Scroll reveal observer - defined first
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible');
+                    obs.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        function renderTabs() {
+            const tabs = document.getElementById('location-tabs');
+            if (locations.length <= 1) {
+                tabs.style.display = 'none';
+                return;
+            }
+            tabs.innerHTML = locations.map((loc, i) => 
+                `<button class="location-tab ${loc.id === currentLocation?.id ? 'active' : ''}" data-id="${loc.id}">${loc.name}</button>`
+            ).join('');
+            tabs.querySelectorAll('.location-tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const loc = locations.find(l => l.id === tab.dataset.id);
+                    if (loc) {
+                        currentLocation = loc;
+                        renderTabs();
+                        renderGallery();
+                        renderMap();
+                    }
+                });
+            });
+        }
+
+        function renderGallery() {
+            const grid = document.getElementById('photo-grid');
+            grid.innerHTML = '';
+            if (!currentLocation) return;
+            currentLocation.photos.forEach((photo, i) => {
+                const thumbFile = photo.file.replace('.jpg', '-thumb.jpg');
+                const figure = document.createElement('figure');
+                figure.className = 'photo-card reveal';
+                figure.dataset.src = `./photos/${photo.file}`;
+                figure.dataset.title = photo.title || '';
+                figure.innerHTML = `
+                    <img src="./photos/thumbs/${thumbFile}" alt="${photo.title || ''}" loading="lazy" width="400" height="600">
+                    <figcaption>
+                        <span class="photo-title">${photo.title || ''}</span>
+                    </figcaption>
+                `;
+                grid.appendChild(figure);
+            });
+            setupLightbox();
+            
+            // Observe new elements
+            document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+        }
+
+        let map, marker;
+        function renderMap() {
+            const mapContainer = document.getElementById('photo-map');
+            document.getElementById('map-caption').textContent = '';
+            
+            if (!currentLocation?.lat) return;
+            
+            const locName = [currentLocation.name, currentLocation.region, currentLocation.country].filter(Boolean).join(', ');
+            document.getElementById('map-caption').textContent = locName;
+
+            if (map) {
+                map.setView([currentLocation.lat, currentLocation.lng], 11);
+                if (marker) map.removeLayer(marker);
+                marker = L.marker([currentLocation.lat, currentLocation.lng]).addTo(map)
+                    .bindPopup(locName).openPopup();
+            } else {
+                map = L.map('photo-map', { scrollWheelZoom: false })
+                    .setView([currentLocation.lat, currentLocation.lng], 11);
+                L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>'
+                }).addTo(map);
+                marker = L.marker([currentLocation.lat, currentLocation.lng]).addTo(map)
+                    .bindPopup(locName).openPopup();
+            }
+        }
+
+        // Theme toggle
+        const toggle = document.getElementById('theme-toggle');
+        const root = document.documentElement;
+        const metaTheme = document.querySelector('meta[name="theme-color"]');
+        const saved = localStorage.getItem('theme');
+        if (saved === 'light') {
+            root.setAttribute('data-theme', 'light');
+            if (metaTheme) metaTheme.setAttribute('content', '#FAF8F5');
+        }
+        toggle.addEventListener('click', () => {
+            const isDark = root.getAttribute('data-theme') === 'dark';
+            const next = isDark ? 'light' : 'dark';
+            root.setAttribute('data-theme', next);
+            toggle.setAttribute('aria-pressed', next === 'dark');
+            localStorage.setItem('theme', next);
+            if (metaTheme) metaTheme.setAttribute('content', next === 'dark' ? '#1c1b1a' : '#FAF8F5');
+        });
+
+        renderTabs();
+        renderGallery();
+        renderMap();
+
+        // Lightbox
+        function setupLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            const allPhotos = document.querySelectorAll('.photo-card');
+            const lightboxImg = lightbox.querySelector('.lightbox-content img');
+            const lightboxCaption = lightbox.querySelector('.lightbox-caption');
+            let currentIndex = 0;
+
+            function openLightbox(index) {
+                currentIndex = index;
+                const photo = allPhotos[index];
+                lightboxImg.src = photo.dataset.src;
+                lightboxCaption.textContent = photo.dataset.title || '';
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeLightbox() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            function showPrev() {
+                currentIndex = (currentIndex - 1 + allPhotos.length) % allPhotos.length;
+                openLightbox(currentIndex);
+            }
+
+            function showNext() {
+                currentIndex = (currentIndex + 1) % allPhotos.length;
+                openLightbox(currentIndex);
+            }
+
+            allPhotos.forEach((photo, i) => {
+                photo.addEventListener('click', () => openLightbox(i));
+                photo.style.cursor = 'pointer';
+            });
+
+            lightbox.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+            lightbox.querySelector('.lightbox-prev').addEventListener('click', showPrev);
+            lightbox.querySelector('.lightbox-next').addEventListener('click', showNext);
+
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) closeLightbox();
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (!lightbox.classList.contains('active')) return;
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowLeft') showPrev();
+                if (e.key === 'ArrowRight') showNext();
+            });
+        }
+        
+        setupLightbox();
+    })();
+    </script>
+</body>
+
+</html>
