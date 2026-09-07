@@ -125,7 +125,7 @@
   }
 
   .section {
-    margin-bottom: var(--space-12);
+    margin-bottom: var(--space-16);
     scroll-margin-top: 68px;
   }
 
@@ -135,14 +135,18 @@
     justify-content: space-between;
     gap: var(--space-4);
     margin-bottom: var(--space-2);
-    padding-bottom: var(--space-2);
+    padding: var(--space-3) 0 var(--space-2);
     border-bottom: 1px solid var(--rule);
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    background: var(--bg);
   }
 
   .section-title {
-    font-size: 0.72rem;
+    font-size: 0.78rem;
     font-weight: 700;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--accent-strong);
   }
@@ -255,9 +259,9 @@
   }
   .profile-text h1 {
     font-size: 2rem;
-    font-weight: 650;
-    letter-spacing: -0.02em;
-    line-height: 1.15;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
     margin-bottom: var(--space-1);
   }
   .profile-role {
